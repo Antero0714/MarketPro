@@ -1,16 +1,35 @@
-# Visual Studio
-.vs
-.user
-.suo
-.cache
-.db
-.sdf
-.sln.docstates
+# ========== Visual Studio ==========
+.vs/
+*.user
+*.suo
+*.cache
+*.db
+*.sdf
+*.sln.docstates
 
-# Build results
-bin
-obj
+# ========== Build results ==========
+bin/
+obj/
+[Aa][Rr][Mm]/
+[Bb]uild/
 
-# Others
-.log
-.vsidx
+# ========== Logs and temporary ==========
+*.log
+*.vsidx
+*.tmp
+*.bak
+
+# ========== Rider/VS Code/etc. (на будущее) ==========
+.idea/
+.vscode/
+
+# ========== NuGet ==========
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+
+# ========== Others ==========
+*.DS_Store
+Thumbs.db
