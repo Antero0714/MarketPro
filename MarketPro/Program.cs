@@ -1,7 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
+using MarketPro.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
+
+var builder = WebApplication.CreateBuilder(args);
+    
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Настройка БД
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseNpgsql(connectionString); 
+});
+
 
 var app = builder.Build();
 
@@ -18,7 +30,21 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+    );
+});
+
+
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+);
 
 app.MapControllerRoute(
     name: "default",

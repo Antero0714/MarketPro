@@ -1,50 +1,199 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="color-two font-exo header-sticky-style">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MarketPro</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MarketPro.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title> MarketPro - E-commerce HTML Template</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/marketPro/assets/images/logo/favicon.png">
+
+    <!-- Bootstrap -->  
+    <link rel="stylesheet" href="~/marketPro/assets/css/bootstrap.min.css">
+    <!-- select 2 -->
+    <link rel="stylesheet" href="~/marketPro/assets/css/select2.min.css">
+    <!-- Slick -->
+    <link rel="stylesheet" href="~/marketPro/assets/css/slick.css">
+    <!-- Jquery Ui -->
+    <link rel="stylesheet" href="~/marketPro/assets/css/jquery-ui.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="~/marketPro/assets/css/animate.css">
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="~/marketPro/assets/css/aos.css">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/marketPro/assets/css/main.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MarketPro</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <!--==================== Preloader Start ====================-->
+    <div class="preloader">
+        <img src="~/marketPro/assets/images/icon/preloader.gif" alt="">
     </div>
-
-    <footer class="border-top footer text-muted">
+    <!--==================== Preloader End ====================-->
+    <!--==================== Overlay Start ====================-->
+    <div class="overlay"></div>
+    <!--==================== Overlay End ====================-->
+    <!--==================== Sidebar Overlay End ====================-->
+    <div class="side-overlay"></div>
+    <!--==================== Sidebar Overlay End ====================-->
+    <!-- ==================== Scroll to Top End Here ==================== -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- ==================== Scroll to Top End Here ==================== -->
+    <!-- ==================== Search Box Start Here ==================== -->
+    <form action="#" class="search-box">
+        <button type="button" class="search-box__close position-absolute inset-block-start-0 inset-inline-end-0 m-16 w-48 h-48 border border-gray-100 rounded-circle flex-center text-white hover-text-gray-800 hover-bg-white text-2xl transition-1">
+            <i class="ph ph-x"></i>
+        </button>
         <div class="container">
-            &copy; 2025 - MarketPro - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="position-relative">
+                <input type="text" class="form-control py-16 px-24 text-xl rounded-pill pe-64" placeholder="Search for a product or brand">
+                <button type="submit" class="w-48 h-48 bg-main-600 rounded-circle flex-center text-xl text-white position-absolute top-50 translate-middle-y inset-inline-end-0 me-8">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </form>
+    <!-- ==================== Search Box End Here ==================== -->
+    <!-- ==================== Mobile Menu Start Here ==================== -->
+    <div class="mobile-menu scroll-sm d-lg-none d-block">
+        <button type="button" class="close-button"> <i class="ph ph-x"></i> </button>
+        <div class="mobile-menu__inner">
+            <a href="index-2.html" class="mobile-menu__logo">
+                <img src="~/marketPro/assets/images/logo/logo.png" alt="Logo">
+            </a>
+            <div class="mobile-menu__menu">
+                <!-- Nav Menu Start -->
+                <ul class="nav-menu flex-align nav-menu--mobile">
+                    <li class="on-hover-item nav-menu__item has-submenu activePage">
+                        <a href="javascript:void(0)" class="nav-menu__link text-heading-two">Home</a>
+                        <ul class="on-hover-dropdown common-dropdown nav-submenu scroll-sm">
+                            <li class="common-dropdown__item nav-submenu__item activePage">
+                                <a href="index-2.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Home Grocery</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="index-two.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Home Electronics</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="index-three.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Home Fashion</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="on-hover-item nav-menu__item has-submenu">
+                        <a href="javascript:void(0)" class="nav-menu__link text-heading-two">Shop</a>
+                        <ul class="on-hover-dropdown common-dropdown nav-submenu scroll-sm">
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="shop.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Shop</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="product-details.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Shop Details</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="product-details-two.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Shop Details Two</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="on-hover-item nav-menu__item has-submenu">
+                        <span class="badge-notification bg-warning-600 text-white text-sm py-2 px-8 rounded-4">New</span>
+                        <a href="javascript:void(0)" class="nav-menu__link text-heading-two">Pages</a>
+                        <ul class="on-hover-dropdown common-dropdown nav-submenu scroll-sm">
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="cart.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Cart</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="wishlist.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Wishlist</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="checkout.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Checkout </a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="become-seller.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Become Seller</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="account.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Account</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="on-hover-item nav-menu__item has-submenu">
+                        <span class="badge-notification bg-tertiary-600 text-white text-sm py-2 px-8 rounded-4">New</span>
+                        <a href="javascript:void(0)" class="nav-menu__link text-heading-two">Vendors</a>
+                        <ul class="on-hover-dropdown common-dropdown nav-submenu scroll-sm">
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="vendor.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Vendors </a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="vendor-details.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Vendor Details </a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="vendor-two.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Vendors Two</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="vendor-two-details.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Vendors Two Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="on-hover-item nav-menu__item has-submenu">
+                        <a href="javascript:void(0)" class="nav-menu__link text-heading-two">Blog</a>
+                        <ul class="on-hover-dropdown common-dropdown nav-submenu scroll-sm">
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="blog.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Blog</a>
+                            </li>
+                            <li class="common-dropdown__item nav-submenu__item">
+                                <a href="blog-details.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Blog Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-menu__item">
+                        <a href="contact.html" class="nav-menu__link text-heading-two">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- Nav Menu End -->
+            </div>
+        </div>
+    </div>
+    <!-- ==================== Mobile Menu End Here ==================== -->
+
+
+    <!-- Discont -->
+    <partial name="_Discont" />
+
+    <!-- Header -->
+    <partial name="_Header" />
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <partial name="_Footer" />
+
+    <!-- Jquery js -->
+    <script src="~/marketPro/assets/js/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap Bundle Js -->
+    <script src="~/marketPro/assets/js/boostrap.bundle.min.js"></script>
+    <!-- Bootstrap Bundle Js -->
+    <script src="~/marketPro/assets/js/phosphor-icon.js"></script>
+    <!-- Select 2 -->
+    <script src="dashboard/assets/js/select2.min.js"></script>
+    <!-- Slick js -->
+    <script src="~/marketPro/assets/js/slick.min.js"></script>
+    <!-- count down js -->
+    <script src="~/marketPro/assets/js/count-down.js"></script>
+    <!-- jquery UI js -->
+    <script src="~/marketPro/assets/js/jquery-ui.js"></script>
+    <!-- wow js -->
+    <script src="~/marketPro/assets/js/wow.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="~/marketPro/assets/js/aos.js"></script>
+    <!-- marque -->
+    <script src="~/marketPro/assets/js/marque.min.js"></script>
+    <!-- marque -->
+    <script src="~/marketPro/assets/js/vanilla-tilt.min.js"></script>
+    <!-- Counter -->
+    <script src="~/marketPro/assets/js/counter.min.js"></script>
+    <!-- main js -->
+    <script src="~/marketPro/assets/js/main.js"></script>
+
 </body>
 </html>

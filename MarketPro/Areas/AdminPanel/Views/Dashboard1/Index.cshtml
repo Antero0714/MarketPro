@@ -1,0 +1,578 @@
+﻿@{
+    ViewData["Title"] = "Dashboard1";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}   
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="card mb-30">
+                                <div class="state">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="state-icon d-flex justify-content-center"><img src="/dashboard/assets/img/png-icon/tax.png" alt=""></div>
+                                        <div class="state-content">
+                                            <p class="font-14 mb-2">Annual Taxes EMS</p>
+                                            <h2>&#36;251k</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="card mb-30">
+                                <div class="state">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="state-icon d-flex justify-content-center"><img src="/dashboard/assets/img/png-icon/revenue.png" alt=""></div>
+                                        <div class="state-content">
+                                            <p class="font-14 mb-2">Average Revenue</p>
+                                            <h2>&#36;2.5M</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="card mb-30">
+                                <div class="state">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="state-icon d-flex justify-content-center"><img src="/dashboard/assets/img/png-icon/comission.png" alt=""></div>
+                                        <div class="state-content">
+                                            <p class="font-14 mb-2">Paid Comissions</p>
+                                            <h2>&#36;4.8M</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="card mb-30">
+                                <div class="state">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="state-icon d-flex justify-content-center"><img src="/dashboard/assets/img/png-icon/user.png" alt=""></div>
+                                        <div class="state-content">
+                                            <p class="font-14 mb-2">Revenue Margin</p>
+                                            <h2>&#36;46%</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <div class="card mb-30">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start align-items-sm-center media">
+                                        <div class="d-flex justify-content-start justify-content-sm-between align-items-start align-items-sm-center flex-column flex-sm-row mb-sm-n3 media-body">
+                                            <div class="title-content mb-4 mb-sm-0">
+                                                <h4 class="mb-2">Sale Reports</h4>
+                                                <p>50% Average</p>
+                                            </div>
+                                            <ul class="list-inline list-button m-0">
+                                                <li class="active">Monthly</li>
+                                                <li>Daily</li>
+                                                <li>Yearly</li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown-button">
+                                            <a href="#" data-toggle="dropdown">
+                                                <div class="menu-icon style--two mt-0 mt-md-1 mr-0 d-flex justify-content-start justify-content-sm-end"><span></span> <span></span> <span></span></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"><a href="#">Report</a> <a href="#">FAQ</a> <a href="#">Charts</a> <a href="#">Chat</a> <a href="#">Settings</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="apex_line4-chart"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12">
+                            <div class="card mb-30">
+                                <div class="card-body mb-3 mb-xl-0">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="title-content">
+                                            <h4 class="mb-2">Top Countries</h4>
+                                        </div>
+                                        <div class="dropdown-button">
+                                            <a href="#" class="d-flex" data-toggle="dropdown">
+                                                <div class="menu-icon style--two mr-0 d-flex"><span></span> <span></span> <span></span></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"><a href="#">Daily</a> <a href="#">Sort By</a> <a href="#">Monthly</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="apex_pie-chart"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-sm-6">
+                            <div class="card mb-30 progress_6">
+                                <div class="card-body">
+                                    <div class="progress-title">
+                                        <h4 class="mb-1">sales</h4>
+                                        <p>Vexed if style allow he there.</p>
+                                    </div>
+                                    <div class="ProgressBar-wrap position-relative mb-5">
+                                        <div class="ProgressBar ProgressBar_6" data-progress="35">
+                                            <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                <circle transform="rotate(135, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="8" />
+                                                <circle transform="rotate(135, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                            </svg> <span class="ProgressBar-percentage--text">Increase</span> <span class="ProgressBar-percentage ProgressBar-percentage--count"></span>
+                                        </div>
+                                    </div>
+                                    <div class="process-bar-wrapper"><span class="process-name">Sales Grow</span> <span class="process-width">35%</span> <span class="process-bar" data-process-width="35"></span></div>
+                                    <div class="process-bar-wrapper"><span class="process-name">Sales Grow</span> <span class="process-width">68%</span> <span class="process-bar style--two" data-process-width="68"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-sm-6">
+                            <div class="card mb-30 progress_7">
+                                <div class="card-body">
+                                    <div class="progress-title">
+                                        <h4 class="mb-1">Company Growth</h4>
+                                        <p>Miea there style allow he now</p>
+                                    </div>
+                                    <div class="ProgressBar-wrap position-relative mb-5">
+                                        <div class="ProgressBar ProgressBar_7" data-progress="70">
+                                            <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                <circle transform="rotate(135, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="8" />
+                                                <circle transform="rotate(135, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                            </svg> <span class="ProgressBar-percentage--text">Increase </span><span class="ProgressBar-percentage ProgressBar-percentage--count"></span>
+                                        </div>
+                                    </div>
+                                    <div class="process-bar-wrapper"><span class="process-name">Sales Grow</span> <span class="process-width">45%</span> <span class="process-bar style--three" data-process-width="45"></span></div>
+                                    <div class="process-bar-wrapper"><span class="process-name">Sales Grow</span> <span class="process-width">23%</span> <span class="process-bar style--four" data-process-width="23"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="card mb-30">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start align-items-sm-end justify-content-between mb-30">
+                                        <div class="">
+                                            <h4 class="mb-1">Last Month Sale</h4>
+                                            <p class="font-14">50% increase in a average</p>
+                                        </div>
+                                        <div class="dropdown-button">
+                                            <a href="#" class="d-flex align-items-center" data-toggle="dropdown">
+                                                <div class="menu-icon style--two mr-0"><span></span> <span></span> <span></span></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"><a href="#">Daily</a> <a href="#">Sort By</a> <a href="#">Monthly</a></div>
+                                        </div>
+                                    </div>
+                                    <div id="apex_line5-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="card mb-30">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start align-items-sm-end justify-content-between mb-3">
+                                        <div class="">
+                                            <h4 class="mb-1">Top Selling Products</h4>
+                                            <p class="font-14">Tell use paid law ever yet new. Meant to learn of vexed he there.</p>
+                                        </div>
+                                        <div class="dropdown-button">
+                                            <a href="#" class="d-flex align-items-center" data-toggle="dropdown">
+                                                <div class="menu-icon style--two mr-0"><span></span> <span></span> <span></span></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"><a href="#">Daily</a> <a href="#">Sort By</a> <a href="#">Monthly</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list">
+                                        <div class="product-list-item mb-20 d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="img mr-3"><img src="/dashboard/assets/img/product/product1.png" alt=""></div>
+                                                <div class="content">
+                                                    <p class="black mb-1">Fastrack Watches</p><span class="c3 bold font-14">$245.65</span>
+                                                </div>
+                                            </div>
+                                            <p class="font-14">26584 Selles</p>
+                                        </div>
+                                        <div class="product-list-item mb-20 d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="img mr-3"><img src="/dashboard/assets/img/product/product2.png" alt=""></div>
+                                                <div class="content">
+                                                    <p class="black mb-1">Fastrack Watches 2654</p><span class="c3 bold font-14">$245.65</span>
+                                                </div>
+                                            </div>
+                                            <p class="font-14">26584 Selles</p>
+                                        </div>
+                                        <div class="product-list-item mb-20 d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="img mr-3"><img src="/dashboard/assets/img/product/product3.png" alt=""></div>
+                                                <div class="content">
+                                                    <p class="black mb-1">Fastrack Watches 2654</p><span class="c3 bold font-14">$245.65</span>
+                                                </div>
+                                            </div>
+                                            <p class="font-14">26584 Selles</p>
+                                        </div>
+                                        <div class="product-list-item d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="img mr-3"><img src="/dashboard/assets/img/product/product4.png" alt=""></div>
+                                                <div class="content">
+                                                    <p class="black mb-1">Fastrack Watches 2654</p><span class="c3 bold font-14">$245.65</span>
+                                                </div>
+                                            </div>
+                                            <p class="font-14">26584 Selles</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card mb-30">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-30">
+                                                <div class="mr-3 square-75"><img src="/dashboard/assets/img/avatar/top-seller.png" class="radius" alt=""></div>
+                                                <div class="">
+                                                    <h4 class="mb-1">Ransel Mendalka</h4>
+                                                    <p class="font-14">Top Sellers</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center mb-40">
+                                                        <div class="progress_8">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_8" data-progress="67">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Products</p>
+                                                            <h4>264</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center mb-40">
+                                                        <div class="progress_9">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_9" data-progress="75">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Earned</p>
+                                                            <h4>$16k</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="progress_10">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_10" data-progress="48">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Orders</p>
+                                                            <h4>$4.6k</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="progress_11">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_11" data-progress="78">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Delivered</p>
+                                                            <h4>$3.4k</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card mb-30">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-30">
+                                                <div class="mr-3 square-75"><img src="/dashboard/assets/img/avatar/top-buyer.png" class="radius" alt=""></div>
+                                                <div class="">
+                                                    <h4 class="mb-1">Bobby Fuller</h4>
+                                                    <p class="font-14">Top Buyer</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center mb-40">
+                                                        <div class="progress_12">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_12" data-progress="67">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Orders</p>
+                                                            <h4>164</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center mb-40">
+                                                        <div class="progress_13">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_13" data-progress="75">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Expenses</p>
+                                                            <h4>$1.6k</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="progress_14">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_14" data-progress="48">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Recived</p>
+                                                            <h4>143</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="progress_15">
+                                                            <div class="ProgressBar-wrap2 position-relative">
+                                                                <div class="ProgressBar ProgressBar_15" data-progress="78">
+                                                                    <svg class="ProgressBar-contentCircle" viewBox="0 0 200 200">
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-background" cx="100" cy="100" r="85" />
+                                                                        <circle transform="rotate(-90, 100, 100)" class="ProgressBar-circle" cx="100" cy="100" r="85" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="mb-1 font-14 l-height1">Reviews</p>
+                                                            <h4>124</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card mb-30">
+                                        <div class="card-body mb-30">
+                                            <div class="d-flex justify-content-between media">
+                                                <div class="d-flex justify-content-between flex-column flex-md-row media-body">
+                                                    <div class="title-content mb-4 mb-md-0">
+                                                        <h4 class="mb-2">Impression</h4>
+                                                        <p class="font-14">Tell use paid law ever yet new. Meant to learn of vexed if style allow he there.</p>
+                                                    </div>
+                                                    <ul class="list-inline list-button m-0">
+                                                        <li class="active">Monthly</li>
+                                                        <li>Yearly</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="dropdown-button">
+                                                    <a href="#" class="d-flex" data-toggle="dropdown">
+                                                        <div class="menu-icon style--two mr-0 pt-1"><span></span> <span></span> <span></span></div>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right"><a href="#">Report</a> <a href="#">FAQ</a> <a href="#">Charts</a> <a href="#">Chat</a> <a href="#">Settings</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="apex_area5-chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-30">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="title-content mb-5">
+                                            <h4 class="mb-2">User Activity</h4>
+                                            <p class="font-14">Aenean sed lorem est. Sed quis neque ut nibh suscipit imperdiet ac non augue. Aenean ornare sit amet lectus non</p>
+                                        </div>
+                                        <div class="dropdown-button">
+                                            <a href="#" class="d-flex align-items-center" data-toggle="dropdown">
+                                                <div class="menu-icon style--two mr-0 d-flex justify-content-center"><span></span> <span></span> <span></span></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"><a href="#">Report</a> <a href="#">FAQ</a> <a href="#">Charts</a> <a href="#">Chat</a> <a href="#">Settings</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive mt-n2">
+                                        <table class="style--two">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date <img src="/dashboard/assets/img/svg/table-down-arrow.svg" alt="" class="svg"></th>
+                                                    <th>Pages/Visit <img src="/dashboard/assets/img/svg/table-down-arrow.svg" alt="" class="svg"></th>
+                                                    <th>New User <img src="/dashboard/assets/img/svg/table-up-arrow.svg" alt="" class="svg"></th>
+                                                    <th>Total Sell</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>12 May 2019</td>
+                                                    <td>145k</td>
+                                                    <td>41k</td>
+                                                    <td>$268.6k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11 May 2019</td>
+                                                    <td>256k</td>
+                                                    <td>10k</td>
+                                                    <td>$256.3k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10 May 2019</td>
+                                                    <td>695k</td>
+                                                    <td>53k</td>
+                                                    <td>$685.9k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>9 May 2019</td>
+                                                    <td>645k</td>
+                                                    <td>59k</td>
+                                                    <td>$568.2k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>8 May 2019</td>
+                                                    <td>69k</td>
+                                                    <td>6k</td>
+                                                    <td>$65.5k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>7 May 2019</td>
+                                                    <td>236k</td>
+                                                    <td>23k</td>
+                                                    <td>$365.5k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6 May 2019</td>
+                                                    <td>96k</td>
+                                                    <td>11k</td>
+                                                    <td>$98.2k</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5 May 2019</td>
+                                                    <td>487k</td>
+                                                    <td>28k</td>
+                                                    <td>$983.6k</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="title-content mb-4">
+                                            <h4 class="mb-2">Recent Orders</h4>
+                                            <p class="font-14">Tell use paid law ever yet new. Meant to learn of vexed if style allow he there.</p>
+                                        </div>
+                                        <div class="dropdown-button">
+                                            <a href="#" class="d-flex align-items-center" data-toggle="dropdown">
+                                                <div class="menu-icon style--two mr-0 d-flex justify-content-center"><span></span> <span></span> <span></span></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"><a href="#">Report</a> <a href="#">FAQ</a> <a href="#">Charts</a> <a href="#">Chat</a> <a href="#">Settings</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="style--three table-centered text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID <img src="/dashboard/assets/img/svg/table-down-arrow.svg" alt="" class="svg"></th>
+                                                <th>Date <img src="/dashboard/assets/img/svg/table-down-arrow.svg" alt="" class="svg"></th>
+                                                <th>Products</th>
+                                                <th>Buyer Name <img src="/dashboard/assets/img/svg/table-up-arrow.svg" alt="" class="svg"></th>
+                                                <th>Status <img src="/dashboard/assets/img/svg/table-down-arrow.svg" alt="" class="svg"></th>
+                                                <th>Price</th>
+                                                <th>Shipping Cost</th>
+                                                <th>Total Cost</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="bold">#01254</td>
+                                                <td>12 Oct 2019</td>
+                                                <td>
+                                                    <div class="product-img"><img src="/dashboard/assets/img/product/product1.png" alt=""> <img src="/dashboard/assets/img/product/product5.png" alt=""> <img src="/dashboard/assets/img/product/product6.png" alt=""></div>
+                                                </td>
+                                                <td>Kyle Lee</td>
+                                                <td class="text-danger">Processing</td>
+                                                <td class="bold">$2456.4</td>
+                                                <td class="bold">$24.6</td>
+                                                <td class="bold">2687</td>
+                                                <td><button type="button" class="details-btn">Details <i class="icofont-arrow-right"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bold">#01365</td>
+                                                <td>12 Oct 2019</td>
+                                                <td>
+                                                    <div class="product-img"><img src="/dashboard/assets/img/product/product2.png" alt=""> <img src="/dashboard/assets/img/product/product7.png" alt=""> <img src="/dashboard/assets/img/product/product3.png" alt=""></div>
+                                                </td>
+                                                <td>Lindo De Sire</td>
+                                                <td class="text-warning">Shipped</td>
+                                                <td class="bold">$2456.4</td>
+                                                <td class="bold">$24.6</td>
+                                                <td class="bold">2687</td>
+                                                <td><button type="button" class="details-btn">Details <i class="icofont-arrow-right"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bold">#03654</td>
+                                                <td>11 Oct 2019</td>
+                                                <td>
+                                                    <div class="product-img"><img src="/dashboard/assets/img/product/product8.png" alt=""> <img src="/dashboard/assets/img/product/product9.png" alt=""> <img src="/dashboard/assets/img/product/product10.png" alt=""></div>
+                                                </td>
+                                                <td>Laturi Yasn</td>
+                                                <td class="text-success">Delivered</td>
+                                                <td class="bold">$2456.4</td>
+                                                <td class="bold">$24.6</td>
+                                                <td class="bold">2687</td>
+                                                <td><button type="button" class="details-btn">Details <i class="icofont-arrow-right"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
