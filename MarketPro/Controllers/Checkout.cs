@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MarketPro.WebAPI.Controllers
 {
+    [Authorize]
     public class Checkout : Controller
     {
         // GET: Checkout

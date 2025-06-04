@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarketPro.WebAPI.Areas.AdminPanel.Controllers
 {
-    [Area("AdminPanel")]
-    public class Dashboard1Controller : Controller
+    public class Dashboard1Controller : AdminBaseController
     {
         // GET: Dashboard1Controller
         public ActionResult Index()

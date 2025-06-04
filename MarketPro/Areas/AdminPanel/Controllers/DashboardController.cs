@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MarketPro.WebAPI.Areas.AdminPanel.Controllers
 {
-    public class DashboardController : AdminBaseController
+    [Area("AdminPanel")]
+    [Authorize(Roles = "Admin")]
+    public class DashboardController : Controller
     {
         // GET: DashboardController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
