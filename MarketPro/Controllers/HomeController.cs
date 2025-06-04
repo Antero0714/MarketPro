@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using MarketPro.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketPro.Controllers
@@ -13,11 +14,13 @@ namespace MarketPro.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

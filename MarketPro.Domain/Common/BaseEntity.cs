@@ -1,6 +1,6 @@
 ﻿using MarketPro.Domain.Common.Interfaces;
 
-namespace SocialNetwork.Domain.Common
+namespace MarketPro.Domain.Common
 {
     public abstract class BaseEntity : IEntity
     {

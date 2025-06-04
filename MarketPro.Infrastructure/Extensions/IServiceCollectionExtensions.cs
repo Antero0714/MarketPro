@@ -1,19 +1,20 @@
-﻿/*using MediatR;
+﻿using MarketPro.Application.Interfaces.Services;
+using MarketPro.Infrastructure.Services;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MarketPro.Infrastructure.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static void AddInfrastructureLayer(this IServiceCollection collection)
+        public static void AddInfrastructureLayer(this IServiceCollection services)
         {
-            collection.AddServices();
+            services.AddServices();
         }
 
-        private static void AddServices(this IServiceCollection sericeCollection)
+        private static void AddServices(this IServiceCollection services)
         {
-            sericeCollection.AddTransient<IMediator, Mediator>();
+            services.AddTransient<IAuthService, AuthService>();
         }
     }
-}
-*/
+}   
