@@ -62,7 +62,7 @@
     <div class="mobile-menu scroll-sm d-lg-none d-block">
         <button type="button" class="close-button"> <i class="ph ph-x"></i> </button>
         <div class="mobile-menu__inner">
-            <a href="index-2.html" class="mobile-menu__logo">
+            <a href="@Url.Action("Index", "home")" class="mobile-menu__logo">
                 <img src="~/marketPro/assets/images/logo/logo.png" alt="Logo">
             </a>
             <div class="mobile-menu__menu">
@@ -72,7 +72,7 @@
                         <a href="javascript:void(0)" class="nav-menu__link text-heading-two">Home</a>
                         <ul class="on-hover-dropdown common-dropdown nav-submenu scroll-sm">
                             <li class="common-dropdown__item nav-submenu__item activePage">
-                                <a href="index-2.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Home Grocery</a>
+                                <a href="@Url.Action("Index", "home")" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Home Grocery</a>
                             </li>
                             <li class="common-dropdown__item nav-submenu__item">
                                 <a href="index-two.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Home Electronics</a>
@@ -107,7 +107,7 @@
                                 <a href="wishlist.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Wishlist</a>
                             </li>
                             <li class="common-dropdown__item nav-submenu__item">
-                                <a href="checkout.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Checkout </a>
+                                <a href="@Url.Action("Index", "Checkout")" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Checkout </a>
                             </li>
                             <li class="common-dropdown__item nav-submenu__item">
                                 <a href="become-seller.html" class="common-dropdown__link nav-submenu__link text-heading-two hover-bg-neutral-100"> Become Seller</a>
