@@ -1,0 +1,142 @@
+@using System.Linq
+@model MarketPro.Application.DTOs.Product.CreateProductDto
+
+@{
+    ViewData["Title"] = "Создание товара";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Создание нового товара</h3>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.ProductTypes == null || ViewBag.Stores == null)
+                    {
+                        <div class="alert alert-warning">
+                            Ошибка загрузки данных. Пожалуйста, обновите страницу.
+                            @if (ViewBag.ProductTypes == null)
+                            {
+                                <div>Типы продуктов не загружены</div>
+                            }
+                            @if (ViewBag.Stores == null)
+                            {
+                                <div>Магазины не загружены</div>
+                            }
+                        </div>
+                    }
+
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Название</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label">Цена</label>
+                            <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ShortDescription" class="control-label">Краткое описание</label>
+                            <textarea asp-for="ShortDescription" class="form-control"></textarea>
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DetailedDescription" class="control-label">Подробное описание</label>
+                            <textarea asp-for="DetailedDescription" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="DetailedDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Specifications" class="control-label">Характеристики</label>
+                            <textarea asp-for="Specifications" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Specifications" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Rating" class="control-label">Рейтинг</label>
+                            <input asp-for="Rating" class="form-control" type="number" step="0.1" min="0" max="5" />
+                            <span asp-validation-for="Rating" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ProductTypeId" class="control-label">Тип товара</label>
+                            <select asp-for="ProductTypeId" class="form-control">
+                                <option value="">-- Выберите тип товара --</option>
+                                @foreach (var type in ViewBag.ProductTypes)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="StoreId" class="control-label">Магазин</label>
+                            <select asp-for="StoreId" class="form-control">
+                                <option value="">-- Выберите магазин --</option>
+                                @foreach (var store in ViewBag.Stores)
+                                {
+                                    <option value="@store.Id">@store.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="StoreId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Images" class="control-label">Изображения (максимум 4)</label>
+                            <input type="file" asp-for="Images" class="form-control" multiple accept="image/*" />
+                            <span asp-validation-for="Images" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">Создать</button>
+                            <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Ограничение на количество выбранных файлов
+            $('input[type="file"]').on('change', function() {
+                if (this.files.length > 4) {
+                    alert('Вы можете загрузить максимум 4 изображения');
+                    this.value = '';
+                }
+            });
+
+            // Проверка загрузки данных
+            var productTypesLoaded = @(ViewBag.ProductTypes != null ? "true" : "false");
+            var storesLoaded = @(ViewBag.Stores != null ? "true" : "false");
+            
+            if (!productTypesLoaded || !storesLoaded) {
+                console.warn('Some data failed to load:', {
+                    productTypesLoaded: productTypesLoaded,
+                    storesLoaded: storesLoaded
+                });
+            }
+
+            // Отладочная информация
+            console.log('ProductTypes:', @Html.Raw(Json.Serialize(ViewBag.ProductTypes)));
+            console.log('Stores:', @Html.Raw(Json.Serialize(ViewBag.Stores)));
+        });
+    </script>
+} 

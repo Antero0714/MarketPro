@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="/dashboard/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.css">
     <link rel="stylesheet" href="/dashboard/assets/plugins/apex/apexcharts.css">
     <link rel="stylesheet" href="/dashboard/assets/css/style.css">
+    
+    <script src="/dashboard/assets/js/jquery.min.js"></script>
+    <script src="/dashboard/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div class="offcanvas-overlay"></div>
@@ -388,12 +391,11 @@
         <footer class="footer">Dashmin © 2020 created by <a href="https://www.themelooks.com/">ThemeLooks</a></footer>
     </div>
 
-    <script src="/dashboard/assets/js/jquery.min.js"></script>
-    <script src="/dashboard/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/dashboard/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dashboard/assets/js/script.js"></script>
     <script src="/dashboard/assets/plugins/apex/apexcharts.min.js"></script>
     <script src="/dashboard/assets/plugins/apex/custom-apexcharts.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>     
 

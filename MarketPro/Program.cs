@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using MarketPro.Infrastructure.Data;
 using MarketPro.Infrastructure.Identity;
 using MarketPro.Models.ViewModels;
+using MarketPro.Application.Interfaces.Services;
+using MarketPro.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+
+// Register application services
+builder.Services.AddScoped<IProductService, ProductService>();
 
 // Configure cookie policy
 builder.Services.ConfigureApplicationCookie(options =>
@@ -84,6 +89,16 @@ using (var scope = app.Services.CreateScope())
         // Ensure database is created and migrations are applied
         context.Database.Migrate();
 
+        // Create roles if they don't exist
+        string[] roleNames = { "Admin", "User" };
+        foreach (var roleName in roleNames)
+        {
+            if (!await roleManager.RoleExistsAsync(roleName))
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+                logger.LogInformation($"Created role {roleName}");
+            }
+        }
 
         // Create admin user if it doesn't exist
         var adminEmail = "andrey@mail.ru";
@@ -108,7 +123,6 @@ using (var scope = app.Services.CreateScope())
             if (result.Succeeded)
             {
                 logger.LogInformation("Admin user created successfully");
-                await userManager.AddToRoleAsync(adminUser, "Admin");
             }
             else
             {
@@ -144,15 +158,26 @@ using (var scope = app.Services.CreateScope())
                     logger.LogError($"Error: {error.Description}");
                 }
             }
+        }
 
-            if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+        // Ensure admin user is in Admin role
+        if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+        {
+            var addToRoleResult = await userManager.AddToRoleAsync(adminUser, "Admin");
+            if (addToRoleResult.Succeeded)
             {
-                await userManager.AddToRoleAsync(adminUser, "Admin");
+                logger.LogInformation($"Added user {adminEmail} to Admin role");
+            }
+            else
+            {
+                logger.LogError($"Failed to add user {adminEmail} to Admin role");
+                foreach (var error in addToRoleResult.Errors)
+                {
+                    logger.LogError($"Error: {error.Description}");
+                }
             }
         }
     }
-
-
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
