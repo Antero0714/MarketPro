@@ -1,0 +1,47 @@
+@model MarketPro.Domain.Entities.Product
+
+@{
+    ViewData["Title"] = "Удаление товара";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Подтверждение удаления</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h4>Вы уверены, что хотите удалить этот товар?</h4>
+                        <p>Это действие нельзя будет отменить.</p>
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Price)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ShortDescription)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.ShortDescription)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Rating)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Rating)</dd>
+                    </dl>
+
+                    <form asp-action="Delete" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                            <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>@item.Id</td>
                                     <td>@item.Name</td>
-                                    <td>@item.Price.ToString("C")</td>
+                                    <td>@item.Price.ToString("C", new System.Globalization.CultureInfo("en-US"))</td>
                                     <td>@item.ProductTypeName</td>
                                     <td>@item.StoreName</td>
                                     <td>@item.Rating</td>

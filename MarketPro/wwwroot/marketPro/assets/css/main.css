@@ -10340,6 +10340,18 @@ input:focus-visible {
     padding: clamp(3rem, -2.173rem + 10.777vw, 7.25rem);
 }
 
+.product-details__thumb img {
+    width: 228px;
+    height: 189px;
+    object-fit: contain; /* Сохраняет пропорции, изображение вписывается */
+    /* Или object-fit: cover; /* Обрезает изображение, чтобы заполнить область */ */
+}
+.max-w-120.max-h-120 img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
 .product-details .slick-initialized.slick-slider .slick-slide > div > div {
     height: 100%;
 }

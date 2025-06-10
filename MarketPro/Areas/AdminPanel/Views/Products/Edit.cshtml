@@ -1,8 +1,7 @@
-@using System.Linq
-@model MarketPro.Application.DTOs.Product.CreateProductDto
+@model MarketPro.Application.DTOs.Product.EditProductDto
 
 @{
-    ViewData["Title"] = "Создание товара";
+    ViewData["Title"] = "Редактирование товара";
     Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +10,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Создание нового товара</h3>
+                    <h3 class="card-title">Редактирование товара</h3>
                 </div>
                 <div class="card-body">
                     @if (!ViewData.ModelState.IsValid)
@@ -49,8 +48,9 @@
                     }
                     else
                     {
-                        <form asp-area="AdminPanel" asp-controller="Products" asp-action="Create" method="post" enctype="multipart/form-data" id="createProductForm">
+                        <form asp-area="AdminPanel" asp-controller="Products" asp-action="Edit" method="post" enctype="multipart/form-data" id="editProductForm">
                             @Html.AntiForgeryToken()
+                            <input type="hidden" asp-for="Id" />
                             <div asp-validation-summary="All" class="text-danger"></div>
 
                             <div class="form-group">
@@ -85,7 +85,7 @@
 
                             <div class="form-group">
                                 <label asp-for="Rating"></label>
-                                <input asp-for="Rating" class="form-control" type="number" step="0.1" min="0" max="5" value="0" />
+                                <input asp-for="Rating" class="form-control" type="number" step="0.1" min="0" max="5" />
                                 <span asp-validation-for="Rating" class="text-danger"></span>
                             </div>
 
@@ -117,11 +117,11 @@
                                 <label asp-for="Images"></label>
                                 <input type="file" asp-for="Images" class="form-control" multiple accept="image/*" />
                                 <span asp-validation-for="Images" class="text-danger"></span>
-                                <small class="form-text text-muted">Выберите от 1 до 4 изображений. Допустимые форматы: JPG, JPEG, PNG, GIF.</small>
+                                <small class="form-text text-muted">Выберите от 0 до 4 изображений. Допустимые форматы: JPG, JPEG, PNG, GIF. Если не выбрать новые изображения, останутся текущие.</small>
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary" id="submitButton">Создать</button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">Сохранить</button>
                                 <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
                             </div>
                         </form>
@@ -155,7 +155,7 @@
             });
 
             // Form submission handling
-            $('#createProductForm').on('submit', function (e) {
+            $('#editProductForm').on('submit', function (e) {
                 console.log('Form submission started');
                 
                 var formData = new FormData(this);

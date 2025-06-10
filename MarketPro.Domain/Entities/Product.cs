@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using MarketPro.Domain.Common;
 
 namespace MarketPro.Domain.Entities
@@ -33,9 +34,13 @@ namespace MarketPro.Domain.Entities
         public Store Store { get; set; }
 
         // Navigation properties
+        [JsonIgnore]
         public ICollection<ProductImage> Images { get; set; }
+        [JsonIgnore]
         public ICollection<WishlistItem> WishlistItems { get; set; }
+        [JsonIgnore]
         public ICollection<CartItem> CartItems { get; set; }
+        [JsonIgnore]
         public ICollection<OrderItem> OrderItems { get; set; }
     }
 } 

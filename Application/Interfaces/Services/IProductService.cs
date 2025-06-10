@@ -9,5 +9,8 @@ namespace MarketPro.Application.Interfaces.Services
         Task<IEnumerable<ProductType>> GetProductTypesAsync();
         Task<IEnumerable<Store>> GetStoresAsync();
         Task<IEnumerable<ProductDto>> GetAllProductsAsync();
+        Task<Product> GetProductByIdAsync(int id);
+        Task<Product> UpdateProductAsync(EditProductDto editProductDto);
+        Task DeleteProductAsync(int id);
     }
 } 

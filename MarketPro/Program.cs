@@ -5,8 +5,17 @@ using MarketPro.Infrastructure.Identity;
 using MarketPro.Models.ViewModels;
 using MarketPro.Application.Interfaces.Services;
 using MarketPro.Infrastructure.Services;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure form options for file uploads
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 25 * 1024 * 1024; // 25MB max file size
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartHeadersLengthLimit = int.MaxValue;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

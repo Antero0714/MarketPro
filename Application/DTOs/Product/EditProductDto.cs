@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MarketPro.Application.DTOs.Product
 {
-    public class CreateProductDto
+    public class EditProductDto
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Название товара обязательно")]
         [MaxLength(200, ErrorMessage = "Название не может быть длиннее 200 символов")]
         [Display(Name = "Название")]
@@ -40,7 +42,6 @@ namespace MarketPro.Application.DTOs.Product
         [Display(Name = "Магазин")]
         public int StoreId { get; set; }
 
-        [Required(ErrorMessage = "Необходимо загрузить хотя бы одно изображение")]
         [Display(Name = "Изображения")]
         public List<IFormFile> Images { get; set; }
     }
