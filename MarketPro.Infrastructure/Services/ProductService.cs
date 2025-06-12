@@ -1,8 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using MarketPro.Application.DTOs.Product;
 using MarketPro.Application.Interfaces.Services;
 using MarketPro.Domain.Entities;
 using MarketPro.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -154,9 +154,14 @@ namespace MarketPro.Infrastructure.Services
             }
         }
 
-        public async Task<IEnumerable<ProductType>> GetProductTypesAsync()
+        public async Task<IEnumerable<ProductTypeDto>> GetProductTypesAsync()
         {
-            return await _context.ProductTypes.ToListAsync();
+            var productTypes = await _context.ProductTypes.ToListAsync();
+            return productTypes.Select(pt => new ProductTypeDto
+            {
+                Id = pt.Id,
+                Name = pt.Name
+            });
         }
 
         public async Task<IEnumerable<Store>> GetStoresAsync()
@@ -164,34 +169,37 @@ namespace MarketPro.Infrastructure.Services
             return await _context.Stores.ToListAsync();
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductDto>> GetProductsAsync(int? categoryId = null)
         {
-            return await _context.Products
+            var query = _context.Products
                 .Include(p => p.ProductType)
                 .Include(p => p.Store)
                 .Include(p => p.Images)
-                .Select(p => new ProductDto
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Price = p.Price,
-                    ShortDescription = p.ShortDescription,
-                    Rating = (double)p.Rating,
-                    ProductTypeName = p.ProductType.Name,
-                    StoreName = p.Store.Name,
-                    MainImageUrl = p.Images.FirstOrDefault(i => i.IsPrimary).ImageUrl ?? p.Images.FirstOrDefault().ImageUrl
-                })
-                .ToListAsync();
+                .Include(p => p.OrderItems)
+                .AsQueryable();
+
+            if (categoryId.HasValue)
+            {
+                query = query.Where(p => p.ProductTypeId == categoryId);
+            }
+
+            var products = await query.ToListAsync();
+            return products.Select(MapToDto);
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<ProductDto> GetProductByIdAsync(int id)
         {
-            _logger.LogInformation($"Getting product by ID: {id}");
-            return await _context.Products
+            var product = await _context.Products
                 .Include(p => p.ProductType)
                 .Include(p => p.Store)
                 .Include(p => p.Images)
+                .Include(p => p.OrderItems)
                 .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+                return null;
+
+            return MapToDto(product);
         }
 
         public async Task<Product> UpdateProductAsync(EditProductDto editProductDto)
@@ -340,6 +348,86 @@ namespace MarketPro.Infrastructure.Services
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+        private static ProductDto MapToDto(Product product)
+        {
+            return new ProductDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                ShortDescription = product.ShortDescription,
+                DetailedDescription = product.DetailedDescription,
+                Specifications = product.Specifications,
+                Rating = product.Rating,
+                ProductTypeId = product.ProductTypeId,
+                ProductTypeName = product.ProductType?.Name,
+                StoreId = product.StoreId,
+                StoreName = product.Store?.Name,
+                ImageUrls = product.Images?.Select(i => i.ImageUrl),
+                OrderCount = product.OrderItems?.Count ?? 0
+            };
+        }
+
+        public async Task<ProductTypeDto> GetProductTypeByIdAsync(int id)
+        {
+            var productType = await _context.ProductTypes.FindAsync(id);
+            if (productType == null)
+                return null;
+
+            return new ProductTypeDto
+            {
+                Id = productType.Id,
+                Name = productType.Name
+            };
+        }
+
+        public async Task<IEnumerable<ProductDto>> GetDealProducts(int? categoryId = null)
+        {
+            var query = _context.Products
+                .Include(p => p.Store)
+                .Include(p => p.ProductType)
+                .Include(p => p.Images)
+                .Include(p => p.OrderItems)
+                .AsQueryable();
+
+            if (categoryId.HasValue)
+            {
+                query = query.Where(p => p.ProductTypeId == categoryId);
+            }
+
+            var products = await query
+                .OrderByDescending(p => p.OrderItems.Count)
+                .Take(10)
+                .ToListAsync();
+
+            return products.Select(MapToDto);
+        }
+
+        public async Task<IEnumerable<ProductTypeDto>> GetCategories()
+        {
+            var categories = await _context.ProductTypes
+                .OrderBy(pt => pt.Name)
+                .ToListAsync();
+
+            return categories.Select(c => new ProductTypeDto
+            {
+                Id = c.Id,
+                Name = c.Name
+            });
+        }
+
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        {
+            var products = await _context.Products
+                .Include(p => p.ProductType)
+                .Include(p => p.Store)
+                .Include(p => p.Images)
+                .Include(p => p.OrderItems)
+                .ToListAsync();
+
+            return products.Select(MapToDto);
         }
     }
 }

@@ -4947,7 +4947,6 @@ input:focus-visible {
 }
 
 .max-w-unset {
-    max-width: unset !important;
 }
 
 .max-w-120 {
@@ -9718,10 +9717,10 @@ input:focus-visible {
     transition: 0s !important;
 }
 
-.product-card__thumb img {
-    max-width: 160px;
-    width: 100%;
-    transition: 0.2s linear;
+.deals-week-slider .product-card__thumb img {
+    width: 115px !important;
+    height: 140px !important;
+    object-fit: contain;
 }
 
 .product-card.style-two {
@@ -9744,15 +9743,17 @@ input:focus-visible {
         width: 124px;
     }
 }
+w-auto max-w-unset{
 
+}
 @media screen and (max-width: 1199px) {
     .product-card__thumb {
         min-height: 160px;
     }
 
-    .product-card__thumb img {
+   /* .product-card__thumb img {
         max-width: 120px;
-    }
+    }*/
 
     .product-card__content .product-card__price span {
         font-size: 0.75rem !important;

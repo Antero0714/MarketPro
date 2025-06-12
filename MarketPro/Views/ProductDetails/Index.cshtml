@@ -4,81 +4,182 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="product-gallery">
-                @if (Model.Images != null && Model.Images.Any())
-                {
-                    var mainImage = Model.Images.FirstOrDefault(i => i.IsPrimary) ?? Model.Images.First();
-                    <div class="main-image mb-4">
-                        <img src="@mainImage.ImageUrl" alt="@Model.Name" class="img-fluid">
-                    </div>
-                    
-                    <div class="thumbnails d-flex">
-                        @foreach (var image in Model.Images)
-                        {
-                            <div class="thumbnail mx-2">
-                                <img src="@image.ImageUrl" alt="@Model.Name" class="img-fluid">
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="product-info">
-                <h5 class="mb-12">@Model.Name</h5>
-                
-                <div class="rating mb-3">
-                    <span class="text-sm fw-medium text-neutral-600">@Model.Rating Star Rating</span>
-                </div>
+<style>
+    .product-details__thumb img {
+        width: 368px;
+        height: 340px;
+        object-fit: contain;
+    }
 
-                <div class="price mb-4">
-                    <h6 class="mb-0">USD @Model.Price.ToString("F2")</h6>
-                </div>
+    .product-details__images-slider .thumbnail-img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+    }
 
-                <div class="short-description mb-4">
-                    <p class="text-gray-700">@Model.ShortDescription</p>
-                </div>
+    .max-w-120 {
+        max-width: 100px !important;
+    }
 
-                <div class="store mb-4">
-                    <span class="fw-semibold">@Model.Store.Name</span>
-                </div>
+    .max-h-120 {
+        max-height: 100px !important;
+    }
+</style>
 
-                <div class="actions mb-4">
-                    <button class="btn btn-primary me-2">Add to Cart</button>
-                    <button class="btn btn-outline-primary">Add to Wishlist</button>
-                </div>
-
-                <div class="mb-40">
-                    <h6 class="mb-24">Product Description</h6>
-                    <div class="detailed-description">
-                        @Html.Raw(Model.DetailedDescription)
-                    </div>
-                </div>
-
-                @if (!string.IsNullOrEmpty(Model.Specifications))
-                {
-                    <div class="specifications mb-4">
-                        <h6 class="mb-3">Specifications</h6>
-                        <div class="specs-content">
-                            @Html.Raw(Model.Specifications)
-                        </div>
-                    </div>
-                }
-            </div>
+<!-- ========================= Breadcrumb Start =============================== -->
+<div class="breadcrumb mb-0 py-26 bg-main-two-50">
+    <div class="container container-lg">
+        <div class="breadcrumb-wrapper flex-between flex-wrap gap-16">
+            <h6 class="mb-0">Product Details</h6>
+            <ul class="flex-align gap-8 flex-wrap">
+                <li class="text-sm">
+                    <a href="@Url.Action("Index", "home")" class="text-gray-900 flex-align gap-8 hover-text-main-600">
+                        <i class="ph ph-house"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="flex-align">
+                    <i class="ph ph-caret-right"></i>
+                </li>
+                <li class="text-sm text-main-600">@Model.Name</li>
+            </ul>
         </div>
     </div>
 </div>
+<!-- ========================= Breadcrumb End =============================== -->
+
+<!-- ========================== Product Details Two Start =========================== -->
+<section class="product-details py-80">
+    <div class="container container-lg">
+        <div class="row gy-4">
+            <div class="col-xl-9">
+                <div class="row gy-4">
+                    <div class="col-xl-6">
+                        <div class="product-details__left">
+                            <div class="product-details__thumb-slider border border-gray-100 rounded-16">
+                                @if (Model.Images != null && Model.Images.Any())
+                                {
+                                    foreach (var image in Model.Images)
+                                    {
+                                        <div>
+                                            <div class="product-details__thumb flex-center h-100">
+                                                <img src="@image.ImageUrl" alt="@Model.Name">
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                            <div class="mt-24">
+                                <div class="product-details__images-slider">
+                                    @if (Model.Images != null && Model.Images.Any())
+                                    {
+                                        foreach (var image in Model.Images)
+                                        {
+                                            <div>
+                                                <div class="max-w-120 max-h-120 h-100 flex-center border border-gray-100 rounded-16 p-8">
+                                                    <img src="@image.ImageUrl" alt="@Model.Name" class="thumbnail-img">
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="product-details__content">
+                            <h5 class="mb-12">@Model.Name</h5>
+                            <div class="flex-align flex-wrap gap-12">
+                                <div class="flex-align gap-12 flex-wrap">
+                                    <div class="flex-align gap-8">
+                                        @for (int i = 0; i < Math.Floor(Model.Rating); i++)
+                                        {
+                                            <span class="text-xs fw-medium text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
+                                        }
+                                    </div>
+                                    <span class="text-sm fw-medium text-neutral-600">@Model.Rating Star Rating</span>
+                                </div>
+                            </div>
+                            <span class="mt-32 pt-32 text-gray-700 border-top border-gray-100 d-block"></span>
+                            <p class="text-gray-700">@Model.ShortDescription</p>
+
+                            <div class="my-32 flex-align gap-16 flex-wrap">
+                                <div class="flex-align gap-8">
+                                    <h6 class="mb-0">USD @Model.Price.ToString("F2")</h6>
+                                </div>
+                            </div>
+
+                            <span class="mt-32 pt-32 text-gray-700 border-top border-gray-100 d-block"></span>
+
+                            <div class="mb-40">
+                                <h6 class="mb-24">Product Description</h6>
+                                <div class="detailed-description">
+                                    @Html.Raw(Model.DetailedDescription)
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.Specifications))
+                            {
+                                <div class="specifications mb-4">
+                                    <h6 class="mb-3">Specifications</h6>
+                                    <div class="specs-content">
+                                        @Html.Raw(Model.Specifications)
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3">
+                <div class="product-details__sidebar py-40 px-32 border border-gray-100 rounded-16">
+                    <div class="mb-32">
+                        <div class="flex-between flex-wrap gap-8 border-bottom border-gray-100 pb-16 mb-16">
+                            <span class="text-gray-500">Price</span>
+                            <h6 class="text-lg mb-0">USD @Model.Price.ToString("F2")</h6>
+                        </div>
+                    </div>
+                    <div class="mt-32">
+                        <div class="px-16 py-8 bg-main-50 rounded-8 flex-between gap-24 mb-0">
+                            <span class="w-32 h-32 bg-white text-main-600 rounded-circle flex-center text-xl flex-shrink-0">
+                                <i class="ph-fill ph-storefront"></i>
+                            </span>
+                            <span class="text-sm text-neutral-600">Sold by: <span class="fw-semibold">@Model.Store.Name</span></span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-main flex-center gap-8 rounded-8 py-16 fw-normal mt-48">
+                        <i class="ph ph-shopping-cart-simple text-lg"></i>
+                        Add To Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================== Product Details Two End =========================== -->
 
 @section Scripts {
     <script>
         $(document).ready(function() {
-            // Обработка кликов по миниатюрам
-            $('.thumbnail img').click(function() {
-                var newSrc = $(this).attr('src');
-                $('.main-image img').attr('src', newSrc);
+            // Инициализация слайдера для основных изображений
+            $('.product-details__thumb-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                asNavFor: '.product-details__images-slider'
+            });
+
+            // Инициализация слайдера для миниатюр
+            $('.product-details__images-slider').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                asNavFor: '.product-details__thumb-slider',
+                dots: false,
+                arrows: false,
+                focusOnSelect: true
             });
         });
     </script>

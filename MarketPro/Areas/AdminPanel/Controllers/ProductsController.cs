@@ -246,6 +246,22 @@ namespace MarketPro.Areas.AdminPanel.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            _logger.LogInformation($"Starting Details action for product ID: {id}");
+
+            var product = await _productService.GetProductByIdAsync(id);
+            if (product == null)
+            {
+                _logger.LogWarning($"Product with ID {id} not found");
+                TempData["Error"] = "Товар не найден";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(product);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation($"Starting Delete GET action for product ID: {id}");
@@ -260,6 +276,7 @@ namespace MarketPro.Areas.AdminPanel.Controllers
 
             return View(product);
         }
+    
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

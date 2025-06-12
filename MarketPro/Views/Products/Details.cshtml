@@ -1,4 +1,4 @@
-@model MarketPro.Domain.Entities.Product
+@model MarketPro.Application.DTOs.Product.ProductDto
 
 @{
     ViewData["Title"] = Model.Name;
@@ -57,13 +57,13 @@
                     <div class="col-xl-6">
                         <div class="product-details__left">
                             <div class="product-details__thumb-slider border border-gray-100 rounded-16">
-                                @if (Model.Images != null && Model.Images.Any())
+                                @if (Model.ImageUrls != null && Model.ImageUrls.Any())
                                 {
-                                    foreach (var image in Model.Images)
+                                    foreach (var image in Model.ImageUrls)
                                     {
                                         <div>
                                             <div class="product-details__thumb flex-center h-100">
-                                                <img src="@image.ImageUrl" alt="@Model.Name">
+                                                <img src="@image" alt="@Model.Name">
                                             </div>
                                         </div>
                                     }
@@ -72,13 +72,13 @@
 
                             <div class="mt-24">
                                 <div class="product-details__images-slider">
-                                    @if (Model.Images != null && Model.Images.Any())
+                                    @if (Model.ImageUrls != null && Model.ImageUrls.Any())
                                     {
-                                        foreach (var image in Model.Images)
+                                        foreach (var image in Model.ImageUrls)
                                         {
                                             <div>
                                                 <div class="max-w-120 max-h-120 h-100 flex-center border border-gray-100 rounded-16 p-8">
-                                                    <img src="@image.ImageUrl" alt="@Model.Name" class="thumbnail-img">
+                                                    <img src="@image" alt="@Model.Name" class="thumbnail-img">
                                                 </div>
                                             </div>
                                         }
@@ -146,7 +146,7 @@
                             <span class="w-32 h-32 bg-white text-main-600 rounded-circle flex-center text-xl flex-shrink-0">
                                 <i class="ph-fill ph-storefront"></i>
                             </span>
-                            <span class="text-sm text-neutral-600">Sold by: <span class="fw-semibold">@Model.Store.Name</span></span>
+                            <span class="text-sm text-neutral-600">Sold by: <span class="fw-semibold">@Model.StoreName</span></span>
                         </div>
                     </div>
                     <a href="#" class="btn btn-main flex-center gap-8 rounded-8 py-16 fw-normal mt-48">

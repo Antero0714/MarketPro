@@ -6,6 +6,7 @@ using MarketPro.Models.ViewModels;
 using MarketPro.Application.Interfaces.Services;
 using MarketPro.Infrastructure.Services;
 using Microsoft.AspNetCore.Http.Features;
+using MarketPro.Infrastructure.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
 // Register application services
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IWishlistService, WishlistService>();
 
 // Configure cookie policy
 builder.Services.ConfigureApplicationCookie(options =>

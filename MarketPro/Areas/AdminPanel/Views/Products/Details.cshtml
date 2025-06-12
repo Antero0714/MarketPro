@@ -1,0 +1,80 @@
+@model MarketPro.Application.DTOs.Product.ProductDto
+
+@{
+    ViewData["Title"] = "Детали товара";
+}
+
+<div class="container-fluid">
+    <h2 class="mb-4">Детали товара</h2>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="product-gallery">
+                @if (Model.ImageUrls != null && Model.ImageUrls.Any())
+                {
+                    var mainImage = Model.ImageUrls.FirstOrDefault();
+                    <div class="main-image mb-4">
+                        <img src="@mainImage" alt="@Model.Name" class="img-fluid">
+                    </div>
+                    
+                    <div class="thumbnails d-flex">
+                        @foreach (var image in Model.ImageUrls)
+                        {
+                            <div class="thumbnail mx-2">
+                                <img src="@image" alt="@Model.Name" class="img-fluid" style="max-width: 100px;">
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="product-info">
+                <dl class="row">
+                    <dt class="col-sm-3">Название</dt>
+                    <dd class="col-sm-9">@Model.Name</dd>
+
+                    <dt class="col-sm-3">Цена</dt>
+                    <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Рейтинг</dt>
+                    <dd class="col-sm-9">@Model.Rating</dd>
+
+                    <dt class="col-sm-3">Тип товара</dt>
+                    <dd class="col-sm-9">@Model.ProductTypeName</dd>
+
+                    <dt class="col-sm-3">Магазин</dt>
+                    <dd class="col-sm-9">@Model.StoreName</dd>
+
+                    <dt class="col-sm-3">Краткое описание</dt>
+                    <dd class="col-sm-9">@Model.ShortDescription</dd>
+
+                    <dt class="col-sm-3">Подробное описание</dt>
+                    <dd class="col-sm-9">@Html.Raw(Model.DetailedDescription)</dd>
+
+                    @if (!string.IsNullOrEmpty(Model.Specifications))
+                    {
+                        <dt class="col-sm-3">Характеристики</dt>
+                        <dd class="col-sm-9">@Html.Raw(Model.Specifications)</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Редактировать</a>
+        <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.thumbnail img').click(function() {
+                var newSrc = $(this).attr('src');
+                $('.main-image img').attr('src', newSrc);
+            });
+        });
+    </script>
+} 

@@ -1,4 +1,4 @@
-@model MarketPro.Domain.Entities.Product
+@model MarketPro.Application.DTOs.Product.ProductDto
 
 @{
     ViewData["Title"] = "Удаление товара";
@@ -19,17 +19,23 @@
                     </div>
 
                     <dl class="row">
-                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+                        <dt class="col-sm-3">Название</dt>
+                        <dd class="col-sm-9">@Model.Name</dd>
 
-                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Price)</dd>
+                        <dt class="col-sm-3">Цена</dt>
+                        <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
 
-                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ShortDescription)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.ShortDescription)</dd>
+                        <dt class="col-sm-3">Краткое описание</dt>
+                        <dd class="col-sm-9">@Model.ShortDescription</dd>
 
-                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Rating)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Rating)</dd>
+                        <dt class="col-sm-3">Рейтинг</dt>
+                        <dd class="col-sm-9">@Model.Rating</dd>
+
+                        <dt class="col-sm-3">Тип товара</dt>
+                        <dd class="col-sm-9">@Model.ProductTypeName</dd>
+
+                        <dt class="col-sm-3">Магазин</dt>
+                        <dd class="col-sm-9">@Model.StoreName</dd>
                     </dl>
 
                     <form asp-action="Delete" method="post">

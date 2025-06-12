@@ -42,7 +42,7 @@
                                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
                                             <i class="icofont-edit"></i> Редактировать
                                         </a>
-                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                        <a href="@Url.Action("Details", "Products", new { id = item.Id, area = "" })" class="btn btn-info btn-sm">
                                             <i class="icofont-info-circle"></i> Детали
                                         </a>
                                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">

@@ -1,0 +1,85 @@
+@model MarketPro.Domain.Entities.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="product-gallery">
+                @if (Model.Images != null && Model.Images.Any())
+                {
+                    var mainImage = Model.Images.FirstOrDefault(i => i.IsPrimary) ?? Model.Images.First();
+                    <div class="main-image mb-4">
+                        <img src="@mainImage.ImageUrl" alt="@Model.Name" class="img-fluid">
+                    </div>
+                    
+                    <div class="thumbnails d-flex">
+                        @foreach (var image in Model.Images)
+                        {
+                            <div class="thumbnail mx-2">
+                                <img src="@image.ImageUrl" alt="@Model.Name" class="img-fluid">
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="product-info">
+                <h5 class="mb-12">@Model.Name</h5>
+                
+                <div class="rating mb-3">
+                    <span class="text-sm fw-medium text-neutral-600">@Model.Rating Star Rating</span>
+                </div>
+
+                <div class="price mb-4">
+                    <h6 class="mb-0">USD @Model.Price.ToString("F2")</h6>
+                </div>
+
+                <div class="short-description mb-4">
+                    <p class="text-gray-700">@Model.ShortDescription</p>
+                </div>
+
+                <div class="store mb-4">
+                    <span class="fw-semibold">@Model.Store.Name</span>
+                </div>
+
+                <div class="actions mb-4">
+                    <button class="btn btn-primary me-2">Add to Cart</button>
+                    <button class="btn btn-outline-primary">Add to Wishlist</button>
+                </div>
+
+                <div class="mb-40">
+                    <h6 class="mb-24">Product Description</h6>
+                    <div class="detailed-description">
+                        @Html.Raw(Model.DetailedDescription)
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Specifications))
+                {
+                    <div class="specifications mb-4">
+                        <h6 class="mb-3">Specifications</h6>
+                        <div class="specs-content">
+                            @Html.Raw(Model.Specifications)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Обработка кликов по миниатюрам
+            $('.thumbnail img').click(function() {
+                var newSrc = $(this).attr('src');
+                $('.main-image img').attr('src', newSrc);
+            });
+        });
+    </script>
+}
