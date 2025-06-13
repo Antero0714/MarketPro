@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure form options for file uploads
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 25 * 1024 * 1024; // 25MB max file size
+    options.MultipartBodyLengthLimit = 25 * 1024 * 1024; 
     options.ValueLengthLimit = int.MaxValue;
     options.MultipartHeadersLengthLimit = int.MaxValue;
 });
@@ -59,10 +59,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseExceptionHandler("/Error"); // Обрабатывает исключения (например, 500)
+app.UseStatusCodePagesWithReExecute("/Error/{0}"); // Обрабатывает статус-коды (например, 404)
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
@@ -186,7 +187,7 @@ using (var scope = app.Services.CreateScope())
                 foreach (var error in addToRoleResult.Errors)
                 {
                     logger.LogError($"Error: {error.Description}");
-                }
+                }   
             }
         }
     }

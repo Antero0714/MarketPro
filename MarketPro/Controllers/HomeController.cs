@@ -9,6 +9,7 @@ using MarketPro.Infrastructure.Services.Interfaces;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MarketPro.Application.DTOs.Product;
 
 namespace MarketPro.Controllers
 {
@@ -32,15 +33,27 @@ namespace MarketPro.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int? categoryId = null, int? featuredCount = 8, int? dealsCount = 8, int? recommendedCount = 8)
+        public async Task<IActionResult> Index(int? categoryId = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var cartItems = userId != null ? _cartService.GetCartItems(userId).Select(x => x.ProductId).ToList() : new List<int>();
             var wishlistItems = userId != null ? _wishlistService.GetWishlistItems(userId).Select(x => x.ProductId).ToList() : new List<int>();
 
-            // Get deal products and categories using the new methods
-            var dealProducts = await _productService.GetDealProducts(categoryId);
+            // Get all products and categories
+            var allProducts = await _productService.GetAllProductsAsync();
             var categories = await _productService.GetCategories();
+
+            // Get phone category ID
+            var phoneCategory = categories.FirstOrDefault(c => c.Name.ToLower().Contains("phone"));
+            var phoneCategoryId = phoneCategory?.Id;
+
+            // Get camera category ID
+            var cameraCategory = categories.FirstOrDefault(c => c.Name.ToLower().Contains("camera"));
+            var cameraCategoryId = cameraCategory?.Id;
+
+            // Get headphone category ID
+            var headphoneCategory = categories.FirstOrDefault(c => c.Name.ToLower().Contains("headphone"));
+            var headphoneCategoryId = headphoneCategory?.Id;
 
             var viewModel = new HomeViewModel
             {
@@ -65,39 +78,28 @@ namespace MarketPro.Controllers
                         ButtonUrl = Url.Action("Index", "Catalog")
                     }
                 },
-                DealProducts = dealProducts,
+                // Deal products (filtered by selected category if any)
+                DealProducts = categoryId.HasValue 
+                    ? allProducts.Where(p => p.ProductTypeId == categoryId).Take(8).ToList()
+                    : allProducts.Take(8).ToList(),
+
+                // Top Selling Products (headphones)
+                TopSellingProducts = allProducts.Where(p => p.ProductTypeId == 2).Take(8).ToList(),
+
+                // Trending Products (all products, filtered by category if selected)
+                TrendingProducts =  allProducts.Where(p => p.ProductTypeId == 1).ToList(),
+
+                // Featured Products (cameras)
+                FeaturedProducts = allProducts.Where(p => p.ProductTypeId == 3).Take(8).ToList(),
+
+                // Recommended Products (TVs)
+                RecommendedProducts = allProducts.Where(p => p.ProductTypeId == 5).Take(8).ToList(),
+
                 Categories = categories,
                 SelectedCategoryId = categoryId,
                 CartItemIds = cartItems,
                 WishlistItemIds = wishlistItems
             };
-
-            // Get all products
-            var allProducts = await _productService.GetAllProductsAsync();
-            
-            // Featured products (highest rated)
-            viewModel.FeaturedProducts = allProducts
-                .OrderByDescending(p => p.Rating)
-                .Take(featuredCount ?? 8)
-                .ToList();
-
-            // Recommended products (mix of rating and orders)
-            viewModel.RecommendedProducts = allProducts
-                .OrderByDescending(p => ((double)p.Rating * 0.7) + (p.OrderCount * 0.3))
-                .Take(recommendedCount ?? 8)
-                .ToList();
-
-            // If category filter is applied, filter all product lists
-            if (categoryId.HasValue)
-            {
-                viewModel.FeaturedProducts = viewModel.FeaturedProducts
-                    .Where(p => p.ProductTypeId == categoryId)
-                    .ToList();
-                    
-                viewModel.RecommendedProducts = viewModel.RecommendedProducts
-                    .Where(p => p.ProductTypeId == categoryId)
-                    .ToList();
-            }
 
             return View(viewModel);
         }
