@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MarketPro.WebAPI.Areas.AdminPanel.Controllers
 {
-    [Area("AdminPanel")]
-    [Authorize(Roles = "Admin")]
-    public class DashboardController : Controller
+    public class DashboardController : AdminBaseController
     {
         // GET: DashboardController
         public IActionResult Index()

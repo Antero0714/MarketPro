@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarketPro.WebAPI.Areas.AdminPanel.Controllers
 {
-    [Area("AdminPanel")]
-    public class SocialMediaAnalyticsController : Controller
+    public class SocialMediaAnalyticsController : AdminBaseController
     {
         // GET: SocialMediaAnalyticsController
         public ActionResult Index()

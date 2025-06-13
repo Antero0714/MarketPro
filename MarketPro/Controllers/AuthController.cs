@@ -106,7 +106,7 @@ namespace MarketPro.Controllers
 
                         if (isAdmin)
                         {
-                            return RedirectToAction("Index", "Dashboard", new { area = "AdminPanel" });
+                            return RedirectToAction("Index", "Products", new { area = "AdminPanel" });
                         }
                         return RedirectToLocal(returnUrl);
                     }

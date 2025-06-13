@@ -22,7 +22,7 @@
     <div class="offcanvas-overlay"></div>
     <div class="wrapper">
         <header class="header white-bg fixed-top d-flex align-content-center flex-wrap">
-            <div class="logo"><a href="/AdminPanel" class="default-logo"><img src="~/dashboard/assets/img/logo.png" alt=""></a><a href="/AdminPanel" class="mobile-logo"><img src="/dashboard/assets/img/mobile-logo.png" alt=""></a></div>
+            <div class="logo"><a href="@Url.Action("Index", "Dashboard")" class="default-logo"><img src="~/dashboard/assets/img/logo.png" alt=""></a><a href="/AdminPanel" class="mobile-logo"><img src="/dashboard/assets/img/mobile-logo.png" alt=""></a></div>
             <div class="main-header">
                 <div class="container-fluid">
                     <div class="row justify-content-between">
@@ -87,17 +87,8 @@
                                 <li class="@(Context.Request.Path == "/AdminPanel/Products/Create" ? "active" : "")">
                                     <a href="@Url.Action("Create", "Products")">Create a Products</a>
                                 </li>
-                                <li class="@(Context.Request.Path == "/AdminPanel/Statistics" ? "active" : "")">
-                                    <a href="@Url.Action("Index", "Statistics")">Statistics</a>
-                                </li>
                                 <li class="@(Context.Request.Path == "/AdminPanel/ProductsCatalog" ? "active" : "")">
                                     <a href="/AdminPanel/ProductsCatalog">Products Catalog</a>
-                                </li>
-                                <li class="@(Context.Request.Path == "/AdminPanel/ProductDetails" ? "active" : "")">
-                                    <a href="/AdminPanel/ProductDetails">Product Details</a>
-                                </li>
-                                <li class="@(Context.Request.Path == "/AdminPanel/CartList" ? "active" : "")">
-                                    <a href="/AdminPanel/CartList">Cart List</a>
                                 </li>
                             </ul>
                         </li>                       

@@ -5,12 +5,11 @@ using MarketPro.Application.DTOs.Product;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Collections.Generic;
+using MarketPro.WebAPI.Areas.AdminPanel.Controllers;
 
 namespace MarketPro.Areas.AdminPanel.Controllers
 {
-    [Area("AdminPanel")]
-    [Authorize(Roles = "Admin")]
-    public class ProductsController : Controller
+    public class ProductsController : AdminBaseController
     {
         private readonly IProductService _productService;
         private readonly ILogger<ProductsController> _logger;
