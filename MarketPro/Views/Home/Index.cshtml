@@ -162,14 +162,9 @@
                                      style="width: 115px; height: 140px; object-fit: contain;">
                                 <div class="product-actions position-absolute top-0 end-0 mt-2 me-2">
                                     <button type="button" 
-                                            class="btn btn-light btn-sm rounded-circle me-2 add-to-wishlist @(Model.WishlistItemIds.Contains(product.Id) ? "active text-danger" : "")" 
+                                            class="btn btn-light btn-sm rounded-circle me-2 add-to-wishlist @(Model.WishlistItemIds.Contains(product.Id) ? "active" : "")" 
                                             data-product-id="@product.Id">
-                                        <i class="ph @(Model.WishlistItemIds.Contains(product.Id) ? "ph-heart-fill" : "ph-heart")"></i>
-                                    </button>
-                                    <button type="button" 
-                                            class="btn btn-light btn-sm rounded-circle add-to-cart @(Model.CartItemIds.Contains(product.Id) ? "active text-primary" : "")" 
-                                            data-product-id="@product.Id">
-                                        <i class="ph @(Model.CartItemIds.Contains(product.Id) ? "ph-shopping-cart-fill" : "ph-shopping-cart")"></i>
+                                        <span class="icon-heart"></span>
                                     </button>
                                 </div>
                             </a>
@@ -185,8 +180,8 @@
                                 <div class="product-card__price my-20">
                                     <span class="text-heading text-md fw-semibold">$@product.Price.ToString("F2")</span>
                                 </div>
-                                <a href="@Url.Action("AddToCart", "Cart", new { id = product.Id })" class="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-pill flex-center gap-8 fw-medium">
-                                    Add To Cart <i class="ph ph-shopping-cart"></i>
+                                <a href="/Cart/AddToCart/@product.Id" class="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-pill flex-center gap-8 fw-medium @(Model.CartItemIds.Contains(product.Id) ? "active bg-success text-white" : "")">
+                                    Add To Cart <span class="icon-cart"></span>
                                 </a>
                             </div>
                         </div>

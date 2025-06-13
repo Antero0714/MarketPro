@@ -1,0 +1,27 @@
+.icon-heart {
+    background-image: url('/marketPro/assets/images/icon/heart.png');
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.icon-cart {
+    background-image: url('/marketPro/assets/images/icon/cart.png');
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.product-card__cart.active .icon-cart {
+    filter: brightness(0) invert(1); /* Делаем иконку белой при активном состоянии */
+}
+
+.add-to-wishlist.active .icon-heart {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%); /* Делаем иконку красной при активном состоянии */
+} 

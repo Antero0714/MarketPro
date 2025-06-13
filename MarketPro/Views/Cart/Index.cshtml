@@ -81,7 +81,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="text-lg h6 mb-0 fw-semibold">$@item.Product.Price.ToString("F2")</span>
+                                                <span class="text-lg h6 mb-0 fw-semibold product-price" data-price="@item.Product.Price">$@item.Product.Price.ToString("F2")</span>
                                             </td>
                                             <td>
                                                 <div class="d-flex rounded-4 overflow-hidden">
@@ -103,7 +103,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="text-lg h6 mb-0 fw-semibold">$@subtotal.ToString("F2")</span>
+                                                <span class="text-lg h6 mb-0 fw-semibold product-total">$@subtotal.ToString("F2")</span>
                                             </td>
                                         </tr>
                                     }
@@ -129,7 +129,7 @@
                     <div class="bg-color-three rounded-8 p-24">
                         <div class="mb-32 flex-between gap-8">
                             <span class="text-gray-900 font-heading-two">Subtotal</span>
-                            <span class="text-gray-900 fw-semibold">$@total.ToString("F2")</span>
+                            <span class="text-gray-900 fw-semibold cart-subtotal">$@total.ToString("F2")</span>
                         </div>
                         <div class="mb-32 flex-between gap-8">
                             <span class="text-gray-900 font-heading-two">Extimated Delivery</span>
@@ -139,7 +139,7 @@
                     <div class="bg-color-three rounded-8 p-24 mt-24">
                         <div class="flex-between gap-8">
                             <span class="text-gray-900 text-xl fw-semibold">Total</span>
-                            <span class="text-gray-900 text-xl fw-semibold">$@total.ToString("F2")</span>
+                            <span class="text-gray-900 text-xl fw-semibold cart-total">$@total.ToString("F2")</span>
                         </div>
                     </div>
                     <a href="@Url.Action("Index", "Checkout")" class="btn btn-main mt-40 py-18 w-100 rounded-8">Proceed to checkout</a>

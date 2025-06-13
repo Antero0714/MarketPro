@@ -11,10 +11,7 @@ $(document).ready(function () {
             data: { productId: productId },
             success: function (response) {
                 if (response.success) {
-                    button.addClass('active text-danger')
-                         .find('i')
-                         .removeClass('ph-heart')
-                         .addClass('ph-heart-fill');
+                    button.addClass('active');
                     toastr.success('Product added to wishlist!');
                 } else {
                     toastr.error(response.message || 'Failed to add to wishlist');
@@ -46,10 +43,7 @@ $(document).ready(function () {
                     });
                     // Update wishlist button state if it exists on the page
                     $('.add-to-wishlist[data-product-id="' + productId + '"]')
-                        .removeClass('active text-danger')
-                        .find('i')
-                        .removeClass('ph-heart-fill')
-                        .addClass('ph-heart');
+                        .removeClass('active');
                     toastr.success('Product removed from wishlist!');
                 } else {
                     toastr.error(response.message || 'Failed to remove from wishlist');
@@ -62,9 +56,9 @@ $(document).ready(function () {
     });
 
     // Add to Cart
-    $('.add-to-cart').click(function (e) {
+    $('.product-card__cart').click(function (e) {
         e.preventDefault();
-        var productId = $(this).data('product-id');
+        var productId = $(this).attr('href').split('/').pop();
         var button = $(this);
 
         $.ajax({
@@ -73,15 +67,12 @@ $(document).ready(function () {
             data: { productId: productId },
             success: function (response) {
                 if (response.success) {
-                    button.addClass('active text-primary')
-                         .find('i')
-                         .removeClass('ph-shopping-cart')
-                         .addClass('ph-shopping-cart-fill');
+                    button.addClass('active bg-success text-white');
                     toastr.success('Product added to cart!');
                     
                     // Update cart total if it exists in the layout
                     if (response.cartTotal) {
-                        $('.cart-total').text(response.cartTotal);
+                        updateCartTotals(response.cartTotal);
                     }
                 } else {
                     toastr.error(response.message || 'Failed to add to cart');
@@ -112,11 +103,8 @@ $(document).ready(function () {
                         }
                     });
                     // Update cart button state if it exists on the page
-                    $('.add-to-cart[data-product-id="' + productId + '"]')
-                        .removeClass('active text-primary')
-                        .find('i')
-                        .removeClass('ph-shopping-cart-fill')
-                        .addClass('ph-shopping-cart');
+                    $('.product-card__cart[href="/Cart/AddToCart/' + productId + '"]')
+                        .removeClass('active bg-success text-white');
                     if (response.cartTotal) {
                         updateCartTotals(response.cartTotal);
                     }
@@ -141,6 +129,11 @@ $(document).ready(function () {
                 if (response.success) {
                     if (response.cartTotal) {
                         updateCartTotals(response.cartTotal);
+                        // Update individual product total
+                        var row = $('.quantity__input[data-product-id="' + productId + '"]').closest('tr');
+                        var price = parseFloat(row.find('.product-price').data('price'));
+                        var total = (price * quantity).toFixed(2);
+                        row.find('.product-total').text('$' + total);
                     }
                 } else {
                     toastr.error(response.message || 'Failed to update quantity');
