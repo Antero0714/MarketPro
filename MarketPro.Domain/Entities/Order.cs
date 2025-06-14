@@ -53,6 +53,7 @@ namespace MarketPro.Domain.Entities
 
         public string AdditionalInformation { get; set; }
 
+        [MaxLength(500)]
         public string Notes { get; set; }
 
         [Required]

@@ -1,12 +1,24 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using MarketPro.Domain.Entities;
+using MarketPro.Application.Interfaces.Services;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using MarketPro.Infrastructure.Services;
 
 namespace MarketPro.WebAPI.Controllers
 {
     [Authorize]
     public class Checkout : Controller
     {
+        private readonly OrderService _orderService;
+
+        public Checkout(OrderService orderService)
+        {
+            _orderService = orderService;
+        }
+
         // GET: Checkout
         public ActionResult Index()
         {
@@ -79,6 +91,32 @@ namespace MarketPro.WebAPI.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PlaceOrder([FromForm] Order order)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Json(new { success = false, message = "Please login to place an order" });
+                }
+
+                // Создаем заказ
+                var createdOrder = await _orderService.CreateOrderAsync(order, userId);
+
+                // Очищаем корзину
+                await _orderService.ClearCartAsync(userId);
+
+                return Json(new { success = true, message = "Order placed successfully!" });
+            }
+            catch (System.Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
             }
         }
     }

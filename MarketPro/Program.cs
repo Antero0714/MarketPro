@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MarketPro.Infrastructure.Data;
 using MarketPro.Infrastructure.Identity;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using MarketPro.Models.ViewModels;
 using MarketPro.Application.Interfaces.Services;
 using MarketPro.Infrastructure.Services;
@@ -46,6 +47,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IWishlistService, WishlistService>();
+builder.Services.AddScoped< OrderService>();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "MarketPro_"; // Префикс для ключей
+});
 
 // Configure cookie policy
 builder.Services.ConfigureApplicationCookie(options =>

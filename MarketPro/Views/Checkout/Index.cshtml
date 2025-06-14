@@ -24,161 +24,118 @@
 </div>
 <!-- ========================= Breadcrumb End =============================== -->
 
-
-
-
 <!-- ================================= Checkout Page Start ===================================== -->
 <section class="checkout py-80">
     <div class="container container-lg">
-        <div class="border border-gray-100 rounded-8 px-30 py-20 mb-40">
-            <span class="">Have a coupon? <a href="cart.html" class="fw-semibold text-gray-900 hover-text-decoration-underline hover-text-main-600">Click here to enter your code</a> </span>
-        </div>
         <div class="row">
             <div class="col-xl-9 col-lg-8">
-                <form action="#" class="pe-xl-5">
+                <form id="checkoutForm" class="pe-xl-5" method="post">
+                    @Html.AntiForgeryToken()
                     <div class="row gy-3">
                         <div class="col-sm-6 col-xs-6">
-                            <input type="text" class="common-input border-gray-100" placeholder="First Name">
+                            <input type="text" name="FirstName" class="common-input border-gray-100" placeholder="First Name" required>
                         </div>
                         <div class="col-sm-6 col-xs-6">
-                            <input type="text" class="common-input border-gray-100" placeholder="Last Name">
+                            <input type="text" name="LastName" class="common-input border-gray-100" placeholder="Last Name" required>
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="Business Name">
+                            <input type="text" name="BusinessName" class="common-input border-gray-100" placeholder="Business Name">
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="United states (US)">
+                            <input type="text" name="Country" class="common-input border-gray-100" placeholder="United states (US)" required>
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="House number and street name">
+                            <input type="text" name="HouseNumberAndStreet" class="common-input border-gray-100" placeholder="House number and street name" required>
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="Apartment, suite, unit, etc. (Optional)">
+                            <input type="text" name="Apartment" class="common-input border-gray-100" placeholder="Apartment, suite, unit, etc. (Optional)">
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="City">
+                            <input type="text" name="City" class="common-input border-gray-100" placeholder="City" required>
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="Sans Fransisco">
+                            <input type="text" name="State" class="common-input border-gray-100" placeholder="State" required>
                         </div>
                         <div class="col-12">
-                            <input type="text" class="common-input border-gray-100" placeholder="Post Code">
+                            <input type="text" name="PostCode" class="common-input border-gray-100" placeholder="Post Code" required>
                         </div>
                         <div class="col-12">
-                            <input type="number" class="common-input border-gray-100" placeholder="Phone">
+                            <input type="tel" name="Phone" class="common-input border-gray-100" placeholder="Phone" required>
                         </div>
                         <div class="col-12">
-                            <input type="email" class="common-input border-gray-100" placeholder="Email Address">
+                            <input type="email" name="EmailAddress" class="common-input border-gray-100" placeholder="Email Address" required>
                         </div>
 
                         <div class="col-12">
                             <div class="my-40">
                                 <h6 class="text-lg mb-24">Additional Information</h6>
-                                <input type="text" class="common-input border-gray-100" placeholder="Notes about your order, e.g. special notes for delivery.">
+                                <textarea name="AdditionalInformation" class="common-input border-gray-100" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                             </div>
                         </div>
-
                     </div>
                 </form>
             </div>
             <div class="col-xl-3 col-lg-4">
                 <div class="checkout-sidebar">
-                    <div class="bg-color-three rounded-8 p-24 text-center">
-                        <span class="text-gray-900 text-xl fw-semibold">Your Orders</span>
-                    </div>
-
-                    <div class="border border-gray-100 rounded-8 px-24 py-40 mt-24">
-                        <div class="mb-32 pb-32 border-bottom border-gray-100 flex-between gap-8">
-                            <span class="text-gray-900 fw-medium text-xl font-heading-two">Product</span>
-                            <span class="text-gray-900 fw-medium text-xl font-heading-two">Subtotal</span>
-                        </div>
-
-                        <div class="flex-between gap-24 mb-32">
-                            <div class="flex-align gap-12">
-                                <span class="text-gray-900 fw-normal text-md font-heading-two w-144">HP Chromebook With Intel Celeron</span>
-                                <span class="text-gray-900 fw-normal text-md font-heading-two"><i class="ph-bold ph-x"></i></span>
-                                <span class="text-gray-900 fw-semibold text-md font-heading-two">1</span>
-                            </div>
-                            <span class="text-gray-900 fw-bold text-md font-heading-two">$250.00</span>
-                        </div>
-                        <div class="flex-between gap-24 mb-32">
-                            <div class="flex-align gap-12">
-                                <span class="text-gray-900 fw-normal text-md font-heading-two w-144">HP Chromebook With Intel Celeron</span>
-                                <span class="text-gray-900 fw-normal text-md font-heading-two"><i class="ph-bold ph-x"></i></span>
-                                <span class="text-gray-900 fw-semibold text-md font-heading-two">1</span>
-                            </div>
-                            <span class="text-gray-900 fw-bold text-md font-heading-two">$250.00</span>
-                        </div>
-                        <div class="flex-between gap-24 mb-32">
-                            <div class="flex-align gap-12">
-                                <span class="text-gray-900 fw-normal text-md font-heading-two w-144">HP Chromebook With Intel Celeron</span>
-                                <span class="text-gray-900 fw-normal text-md font-heading-two"><i class="ph-bold ph-x"></i></span>
-                                <span class="text-gray-900 fw-semibold text-md font-heading-two">1</span>
-                            </div>
-                            <span class="text-gray-900 fw-bold text-md font-heading-two">$250.00</span>
-                        </div>
-                        <div class="flex-between gap-24 mb-32">
-                            <div class="flex-align gap-12">
-                                <span class="text-gray-900 fw-normal text-md font-heading-two w-144">HP Chromebook With Intel Celeron</span>
-                                <span class="text-gray-900 fw-normal text-md font-heading-two"><i class="ph-bold ph-x"></i></span>
-                                <span class="text-gray-900 fw-semibold text-md font-heading-two">1</span>
-                            </div>
-                            <span class="text-gray-900 fw-bold text-md font-heading-two">$250.00</span>
-                        </div>
-
-
-                        <div class="border-top border-gray-100 pt-30  mt-30">
-                            <div class="mb-32 flex-between gap-8">
-                                <span class="text-gray-900 font-heading-two text-xl fw-semibold">Subtotal</span>
-                                <span class="text-gray-900 font-heading-two text-md fw-bold">$859.00</span>
-                            </div>
-                            <div class="mb-0 flex-between gap-8">
-                                <span class="text-gray-900 font-heading-two text-xl fw-semibold">Total</span>
-                                <span class="text-gray-900 font-heading-two text-md fw-bold">$859.00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-32">
-                        <div class="payment-item">
-                            <div class="form-check common-check common-radio py-16 mb-0">
-                                <input class="form-check-input" type="radio" name="payment" id="payment1" checked>
-                                <label class="form-check-label fw-semibold text-neutral-600" for="payment1">Direct Bank transfer</label>
-                            </div>
-                            <div class="payment-item__content px-16 py-24 rounded-8 bg-main-50 position-relative">
-                                <p class="text-gray-800">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
-                            </div>
-                        </div>
-                        <div class="payment-item">
-                            <div class="form-check common-check common-radio py-16 mb-0">
-                                <input class="form-check-input" type="radio" name="payment" id="payment2">
-                                <label class="form-check-label fw-semibold text-neutral-600" for="payment2">Check payments</label>
-                            </div>
-                            <div class="payment-item__content px-16 py-24 rounded-8 bg-main-50 position-relative">
-                                <p class="text-gray-800">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
-                            </div>
-                        </div>
-                        <div class="payment-item">
-                            <div class="form-check common-check common-radio py-16 mb-0">
-                                <input class="form-check-input" type="radio" name="payment" id="payment3">
-                                <label class="form-check-label fw-semibold text-neutral-600" for="payment3">Cash on delivery</label>
-                            </div>
-                            <div class="payment-item__content px-16 py-24 rounded-8 bg-main-50 position-relative">
-                                <p class="text-gray-800">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="mt-32 pt-32 border-top border-gray-100">
-                        <p class="text-gray-500">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#" class="text-main-600 text-decoration-underline"> privacy policy</a> .</p>
+                        <p class="text-gray-500">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#" class="text-main-600 text-decoration-underline"> privacy policy</a>.</p>
                     </div>
 
-                    <a href="@Url.Action("Index", "Checkout")" class="btn btn-main mt-40 py-18 w-100 rounded-8 mt-56">Place Order</a>
-
+                    <button type="submit" form="checkoutForm" class="btn btn-main mt-40 py-18 w-100 rounded-8 mt-56">Place Order</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- ================================= Checkout Page End ===================================== -->
+
+@section Scripts {
+    <script>
+        // Проверяем, что jQuery загружен
+        if (typeof jQuery === 'undefined') {
+            console.error('jQuery is not loaded!');
+        } else {
+            console.log('jQuery is loaded, version:', jQuery.fn.jquery);
+        }
+
+        $(document).ready(function () {
+            console.log('Document ready handler executed');
+            
+            // Обработка отправки формы
+            $("#checkoutForm").on('submit', function (e) {
+                e.preventDefault();
+                console.log('Form submitted');
+                
+                var form = $(this);
+                
+                // Отправляем запрос
+                $.ajax({
+                    url: '@Url.Action("PlaceOrder", "Checkout")',
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function (response) {
+                        console.log("Success response:", response);
+                        if (response.success) {
+                            // Показываем уведомление об успехе
+                            toastr.success(response.message);
+                            
+                            // Перенаправляем на главную страницу через 2 секунды
+                            setTimeout(function() {
+                                window.location.href = '@Url.Action("Index", "Home")';
+                            }, 2000);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", error);
+                        console.error("Status:", status);
+                        console.error("Response:", xhr.responseText);
+                        toastr.error('An error occurred while placing your order. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+}
 

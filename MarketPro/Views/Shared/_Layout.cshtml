@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
-    <title> MarketPro - E-commerce HTML Template</title>
+    <title>@ViewData["Title"] - MarketPro</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="~/marketPro/assets/images/logo/favicon.png">
 
@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="~/marketPro/assets/css/main.css">
     <!-- Custom icons -->
     <link rel="stylesheet" href="~/css/custom-icons.css">
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <!--==================== Preloader Start ====================-->
@@ -176,7 +181,7 @@
     <!-- Bootstrap Bundle Js -->
     <script src="~/marketPro/assets/js/phosphor-icon.js"></script>
     <!-- Select 2 -->
-    <script src="dashboard/assets/js/select2.min.js"></script>
+    <script src="~/dashboard/assets/plugins/select2/select2.min.js"></script>
     <!-- Slick js -->
     <script src="~/marketPro/assets/js/slick.min.js"></script>
     <!-- count down js -->
@@ -196,13 +201,26 @@
     <!-- main js -->
     <script src="~/marketPro/assets/js/main.js"></script>
 
-    <!-- Toastr -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        // Конфигурация toastr
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+    </script>
 
     <!-- Custom Scripts -->
     <script src="~/js/product-actions.js"></script>
 
     <script src="/_framework/aspnetcore-browser-refresh.js"></script>
+
+    <!-- Скрипты -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
