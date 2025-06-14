@@ -76,7 +76,7 @@ namespace MarketPro.WebAPI.Controllers
             var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
             page = Math.Max(1, Math.Min(page, totalPages));
 
-            // Get paginated products
+            // Get paginated productsZZz
             var paginatedProducts = filteredProducts
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize);

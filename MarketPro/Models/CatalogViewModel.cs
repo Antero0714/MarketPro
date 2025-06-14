@@ -15,7 +15,7 @@ namespace MarketPro.Models
         public int TotalPages { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
-        public int? Rating { get; set; }
+        public decimal? Rating { get; set; }
         public string Brand { get; set; }
     }
 } 

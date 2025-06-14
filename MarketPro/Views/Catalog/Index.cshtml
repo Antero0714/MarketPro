@@ -54,52 +54,39 @@
                     </div>
                     <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32 mb-32">
                         <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Filter by Price</h6>
-                        <div class="custom--range">
-                            <div id="slider-range"></div>
-                            <div class="flex-between flex-wrap-reverse gap-8 mt-24">
-                                <button type="button" id="priceFilterBtn" class="btn btn-main h-40 flex-align">Filter</button>
-                                <div class="custom--range__content flex-align gap-8">
-                                    <span class="text-gray-500 text-md flex-shrink-0">Price:</span>
-                                    <input type="text" class="custom--range__prices text-neutral-600 text-start text-md fw-medium" id="amount" readonly>
+                        <div class="price-filter">
+                            <div class="price-input flex-between gap-16 mb-24">
+                                <div class="field flex-1">
+                                    <span class="d-block mb-2">Min</span>
+                                    <input type="number" class="input-min form-control w-100" id="minPrice" value="@(Model.MinPrice ?? 0)">
+                                </div>
+                                <div class="field flex-1">
+                                    <span class="d-block mb-2">Max</span>
+                                    <input type="number" class="input-max form-control w-100" id="maxPrice" value="@(Model.MaxPrice ?? 10000)">
                                 </div>
                             </div>
+                            <button type="button" class="btn btn-primary w-100" id="applyPriceFilter">Apply Filter</button>
                         </div>
-                    </div>
-                    <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32 mb-32">
-                        <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Filter by Rating</h6>
-                        @for (int i = 5; i >= 1; i--)
-                        {
-                            <div class="flex-align gap-8 position-relative mb-20">
-                                <label class="position-absolute w-100 h-100 cursor-pointer" for="rating@(i)"></label>
-                                <div class="common-check common-radio mb-0">
-                                    <input class="form-check-input rating-filter" type="radio" name="rating" id="rating@(i)" value="@i" @(Model.Rating == i ? "checked" : "")>
-                                </div>
-                                <div class="progress w-100 bg-gray-100 rounded-pill h-8" role="progressbar" aria-label="Rating @i" aria-valuenow="@(i * 20)" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar bg-main-600 rounded-pill" style="width: @(i * 20)%"></div>
-                                </div>
-                                <div class="flex-align gap-4">
-                                    @for (int j = 1; j <= 5; j++)
-                                    {
-                                        <span class="text-xs fw-medium @(j <= i ? "text-warning-600" : "text-gray-400") d-flex">
-                                            <i class="ph-fill ph-star"></i>
-                                        </span>
-                                    }
-                                </div>
-                            </div>
-                        }
                     </div>
                     <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32 mb-32">
                         <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Filter by Brand</h6>
                         <ul class="max-h-540 overflow-y-auto scroll-sm">
+                            <li class="mb-24">
+                                <div class="form-check common-check common-radio">
+                                    <input class="form-check-input brand-filter" type="radio" name="brand" id="brand_all" value="" @(string.IsNullOrEmpty(Model.Brand) ? "checked" : "")>
+                                    <label class="form-check-label" for="brand_all">All Brands</label>
+                                </div>
+                            </li>
                             @{
-                                var brands = Model.Products.Select(p => p.StoreName).Distinct().ToList();
+                                var brands = Model.Products.Select(p => p.StoreName).Distinct().OrderBy(b => b).ToList();
                             }
                             @foreach (var brand in brands)
                             {
+                                var brandId = brand.ToLower().Replace(" ", "_");
                                 <li class="mb-24">
                                     <div class="form-check common-check common-radio">
-                                        <input class="form-check-input brand-filter" type="radio" name="brand" id="brand_@brand" value="@brand" @(Model.Brand == brand ? "checked" : "")>
-                                        <label class="form-check-label" for="brand_@brand">@brand</label>
+                                        <input class="form-check-input brand-filter" type="radio" name="brand" id="brand_@brandId" value="@brand" @(Model.Brand == brand ? "checked" : "")>
+                                        <label class="form-check-label" for="brand_@brandId">@brand</label>
                                     </div>
                                 </li>
                             }
@@ -204,80 +191,84 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function() {
-            // Initialize price range slider
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: 10000,
-                values: [@(Model.MinPrice ?? 0), @(Model.MaxPrice ?? 10000)],
-                slide: function(event, ui) {
-                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                }
-            });
-            $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-
-            // Price filter button click handler
-            $("#priceFilterBtn").click(function() {
-                var values = $("#slider-range").slider("values");
-                var url = new URL(window.location.href);
-                url.searchParams.set("minPrice", values[0]);
-                url.searchParams.set("maxPrice", values[1]);
-                window.location.href = url.toString();
-            });
-
-            // Rating filter change handler
-            $(".rating-filter").change(function() {
-                var url = new URL(window.location.href);
-                url.searchParams.set("rating", $(this).val());
-                window.location.href = url.toString();
-            });
-
-            // Brand filter change handler
-            $(".brand-filter").change(function() {
-                var url = new URL(window.location.href);
-                url.searchParams.set("brand", $(this).val());
-                window.location.href = url.toString();
-            });
-
-            // Save filter state to localStorage
-            function saveFilterState() {
-                var filters = {
-                    minPrice: $("#slider-range").slider("values", 0),
-                    maxPrice: $("#slider-range").slider("values", 1),
-                    rating: $("input[name='rating']:checked").val(),
-                    brand: $("input[name='brand']:checked").val()
+        $(document).ready(function () {
+            // Handle filter changes
+            $('.brand-filter, .rating-filter').change(function() {
+                const filters = {
+                    brand: $('input[name="brand"]:checked').val() || '',
+                    rating: $('input[name="rating"]:checked').val() || '',
+                    minPrice: $('#minPrice').val() || '',
+                    maxPrice: $('#maxPrice').val() || ''
                 };
-                localStorage.setItem('catalogFilters', JSON.stringify(filters));
-            }
 
-            // Load filter state from localStorage
-            function loadFilterState() {
-                var filters = localStorage.getItem('catalogFilters');
-                if (filters) {
-                    filters = JSON.parse(filters);
-                    
-                    // Apply price range
-                    $("#slider-range").slider("values", [filters.minPrice, filters.maxPrice]);
-                    $("#amount").val("$" + filters.minPrice + " - $" + filters.maxPrice);
-
-                    // Apply rating
-                    if (filters.rating) {
-                        $(`input[name='rating'][value='${filters.rating}']`).prop('checked', true);
-                    }
-
-                    // Apply brand
-                    if (filters.brand) {
-                        $(`input[name='brand'][value='${filters.brand}']`).prop('checked', true);
-                    }
+                // Build query string
+                const queryParams = new URLSearchParams(window.location.search);
+                
+                // Update or remove parameters
+                if (filters.brand) {
+                    queryParams.set('brand', filters.brand);
+                } else {
+                    queryParams.delete('brand');
                 }
-            }
+                
+                if (filters.rating) {
+                    queryParams.set('rating', filters.rating);
+                } else {
+                    queryParams.delete('rating');
+                }
 
-            // Save filter state before leaving page
-            $(window).on('beforeunload', saveFilterState);
+                // Reset to first page when filters change
+                queryParams.delete('page');
 
-            // Load filter state on page load
-            loadFilterState();
+                // Redirect with filters
+                const queryString = queryParams.toString();
+                window.location.href = `${window.location.pathname}${queryString ? '?' + queryString : ''}`;
+            });
+
+            // Handle price filter
+            $('#applyPriceFilter').click(function() {
+                const minPrice = $('#minPrice').val();
+                const maxPrice = $('#maxPrice').val();
+                
+                // Build query string
+                const queryParams = new URLSearchParams(window.location.search);
+                
+                if (minPrice) {
+                    queryParams.set('minPrice', minPrice);
+                } else {
+                    queryParams.delete('minPrice');
+                }
+                
+                if (maxPrice) {
+                    queryParams.set('maxPrice', maxPrice);
+                } else {
+                    queryParams.delete('maxPrice');
+                }
+
+                // Reset to first page when filters change
+                queryParams.delete('page');
+
+                // Redirect with filters
+                const queryString = queryParams.toString();
+                window.location.href = `${window.location.pathname}${queryString ? '?' + queryString : ''}`;
+            });
+
+            // Validate price inputs
+            $('#minPrice, #maxPrice').on('input', function() {
+                let min = parseInt($('#minPrice').val()) || 0;
+                let max = parseInt($('#maxPrice').val()) || 10000;
+                
+                if (min < 0) min = 0;
+                if (max < min) max = min;
+                
+                $('#minPrice').val(min);
+                $('#maxPrice').val(max);
+            });
+
+            // Clear all filters
+            $('#clearFilters').click(function() {
+                window.location.href = window.location.pathname;
+            });
         });
     </script>
 }
