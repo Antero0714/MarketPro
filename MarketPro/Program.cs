@@ -8,8 +8,19 @@ using MarketPro.Application.Interfaces.Services;
 using MarketPro.Infrastructure.Services;
 using Microsoft.AspNetCore.Http.Features;
 using MarketPro.Infrastructure.Services.Interfaces;
+using StackExchange.Redis;
+using System.Security.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Kestrel
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenLocalhost(7213, listenOptions =>
+    {
+        listenOptions.UseHttps();
+    });
+});
 
 // Configure form options for file uploads
 builder.Services.Configure<FormOptions>(options =>
@@ -47,12 +58,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IWishlistService, WishlistService>();
-builder.Services.AddScoped< OrderService>();
+builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<RedisService>();
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration.GetConnectionString("Redis");
-    options.InstanceName = "MarketPro_"; // Префикс для ключей
+    options.Configuration = builder.Configuration.GetSection("ConnectionStrings:Redis").Value;
+    options.InstanceName = "MarketPro_";
 });
 
 // Configure cookie policy

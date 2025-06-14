@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MarketPro.Domain.Entities;
 using MarketPro.Infrastructure.Services.Interfaces;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MarketPro.Controllers
 {
@@ -15,16 +16,16 @@ namespace MarketPro.Controllers
             _cartService = cartService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var cartItems = _cartService.GetCartItems(userId);
+            var cartItems = await _cartService.GetCartItems(userId);
             return View("~/Views/Cart/Index.cshtml", cartItems);
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult AddToCart(int productId)
+        public async Task<IActionResult> AddToCart(int productId)
         {
             try
             {
@@ -34,8 +35,8 @@ namespace MarketPro.Controllers
                     return Json(new { success = false, message = "Please login to add items to cart" });
                 }
 
-                var result = _cartService.AddToCart(userId, productId);
-                var cartTotal = _cartService.GetCartTotal(userId);
+                var result = await _cartService.AddToCart(userId, productId);
+                var cartTotal = await _cartService.GetCartTotal(userId);
                 return Json(new { success = true, cartTotal = cartTotal.ToString("C") });
             }
             catch (Exception ex)
@@ -46,13 +47,13 @@ namespace MarketPro.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult RemoveFromCart(int productId)
+        public async Task<IActionResult> RemoveFromCart(int productId)
         {
             try
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                _cartService.RemoveFromCart(userId, productId);
-                var cartTotal = _cartService.GetCartTotal(userId);
+                await _cartService.RemoveFromCart(userId, productId);
+                var cartTotal = await _cartService.GetCartTotal(userId);
                 return Json(new { success = true, cartTotal = cartTotal.ToString("C") });
             }
             catch (Exception ex)
@@ -63,13 +64,13 @@ namespace MarketPro.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult UpdateQuantity(int productId, int quantity)
+        public async Task<IActionResult> UpdateQuantity(int productId, int quantity)
         {
             try
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                _cartService.UpdateQuantity(userId, productId, quantity);
-                var cartTotal = _cartService.GetCartTotal(userId);
+                await _cartService.UpdateQuantity(userId, productId, quantity);
+                var cartTotal = await _cartService.GetCartTotal(userId);
                 return Json(new { success = true, cartTotal = cartTotal.ToString("C") });
             }
             catch (Exception ex)

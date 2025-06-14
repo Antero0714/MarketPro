@@ -141,7 +141,7 @@
                             <h6 class="text-lg mb-0">USD @Model.Price.ToString("F2")</h6>
                         </div>
                     </div>
-                    <div class="mt-32">
+                    <div class="mt-32 mb-32">
                         <div class="px-16 py-8 bg-main-50 rounded-8 flex-between gap-24 mb-0">
                             <span class="w-32 h-32 bg-white text-main-600 rounded-circle flex-center text-xl flex-shrink-0">
                                 <i class="ph-fill ph-storefront"></i>
@@ -149,9 +149,8 @@
                             <span class="text-sm text-neutral-600">Sold by: <span class="fw-semibold">@Model.StoreName</span></span>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-main flex-center gap-8 rounded-8 py-16 fw-normal mt-48">
-                        <i class="ph ph-shopping-cart-simple text-lg"></i>
-                        Add To Cart
+                    <a href="/Cart/AddToCart/@Model.Id" class="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-8 flex-center gap-8 fw-medium)">
+                        Add To Cart <i class="ph ph-shopping-cart"></i>
                     </a>
                 </div>
             </div>

@@ -1,0 +1,43 @@
+@using System.Security.Claims
+@{
+    ViewData["Title"] = "Profile";
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Your Profile</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">User ID (для отладки Redis):</label>
+                        <input type="text" class="form-control" value="@userId" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" value="@User.Identity?.Name" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4>Redis Debug Links</h4>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="/api/redisdebug/wishlist/@userId" class="list-group-item list-group-item-action" target="_blank">
+                            View Wishlist Cache
+                        </a>
+                        <a href="/api/redisdebug/cart/@userId" class="list-group-item list-group-item-action" target="_blank">
+                            View Cart Cache
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -428,6 +428,13 @@
                                                      alt="@product.Name"
                                                      class="w-auto max-w-unset"
                                                      style="width: 115px; height: 140px; object-fit: contain;">
+                                                <div class="product-actions position-absolute top-0 end-0 mt-2 me-2">
+                                                    <button type="button"
+                                                            class="btn btn-light btn-sm rounded-circle me-2 add-to-wishlist @(Model.WishlistItemIds.Contains(product.Id) ? "active" : "")"
+                                                            data-product-id="@product.Id">
+                                                        <span class="icon-heart"></span>
+                                                    </button>
+                                                </div>
                                             </a>
                                             <div class="product-card__content my-20 flex-grow-1">
                                                 <h6 class="title text-lg fw-semibold mb-12">
@@ -554,11 +561,14 @@
 
                                             <span class="py-2 px-8 text-xs rounded-pill text-main-two-600 bg-main-two-50 mt-16">Fulfilled by Marketpro</span>
 
-                                            <div class="product-card__price mt-16 mb-30">
+                                            <div class="product-card__price mt-16 mb-20">
                                                 
                                                 <span class="text-heading text-md fw-semibold">$@product.Price.ToString("F2")</span>
                                             </div>
-                                            <span class="text-neutral-600">Delivered by <span class="text-main-600">Aug 02</span></span>
+                                            <span class="text-neutral-600 mb-3 d-block">Delivered by <span class="text-main-600">Aug 02</span></span>
+                                            <a href="/Cart/AddToCart/@product.Id" class="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-pill flex-center gap-8 fw-medium @(Model.CartItemIds.Contains(product.Id) ? "active bg-success text-white" : "")">
+                                                Add To Cart <span class="icon-cart"></span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

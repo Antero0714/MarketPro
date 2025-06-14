@@ -1,14 +1,15 @@
 using MarketPro.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MarketPro.Infrastructure.Services.Interfaces
 {
     public interface ICartService
     {
-        IEnumerable<CartItem> GetCartItems(string userId);
-        bool AddToCart(string userId, int productId);
-        void RemoveFromCart(string userId, int productId);
-        void UpdateQuantity(string userId, int productId, int quantity);
-        decimal GetCartTotal(string userId);
+        Task<IEnumerable<CartItem>> GetCartItems(string userId);
+        Task<bool> AddToCart(string userId, int productId);
+        Task RemoveFromCart(string userId, int productId);
+        Task UpdateQuantity(string userId, int productId, int quantity);
+        Task<decimal> GetCartTotal(string userId);
     }
 } 

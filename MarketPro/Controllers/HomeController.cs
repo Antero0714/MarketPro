@@ -36,8 +36,13 @@ namespace MarketPro.Controllers
         public async Task<IActionResult> Index(int? categoryId = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var cartItems = userId != null ? _cartService.GetCartItems(userId).Select(x => x.ProductId).ToList() : new List<int>();
-            var wishlistItems = userId != null ? _wishlistService.GetWishlistItems(userId).Select(x => x.ProductId).ToList() : new List<int>();
+            var cartItems = userId != null
+                ? (await _cartService.GetCartItems(userId)).Select(x => x.ProductId).ToList()
+                : new List<int>();
+
+            var wishlistItems = userId != null
+                ? (await _wishlistService.GetWishlistItems(userId)).Select(x => x.ProductId).ToList()
+                : new List<int>();
 
             // Get all products and categories
             var allProducts = await _productService.GetAllProductsAsync();

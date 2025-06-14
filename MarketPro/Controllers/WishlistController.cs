@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MarketPro.Domain.Entities;
 using MarketPro.Infrastructure.Services.Interfaces;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MarketPro.Controllers
 {
@@ -15,16 +16,16 @@ namespace MarketPro.Controllers
             _wishlistService = wishlistService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var wishlistItems = _wishlistService.GetWishlistItems(userId);
+            var wishlistItems = await _wishlistService.GetWishlistItems(userId);
             return View(wishlistItems);
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult AddToWishlist(int productId)
+        public async Task<IActionResult> AddToWishlist(int productId)
         {
             try
             {
@@ -34,7 +35,7 @@ namespace MarketPro.Controllers
                     return Json(new { success = false, message = "Please login to add items to wishlist" });
                 }
 
-                var result = _wishlistService.AddToWishlist(userId, productId);
+                var result = await _wishlistService.AddToWishlist(userId, productId);
                 return Json(new { success = true });
             }
             catch (Exception ex)
@@ -45,12 +46,12 @@ namespace MarketPro.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult RemoveFromWishlist(int productId)
+        public async Task<IActionResult> RemoveFromWishlist(int productId)
         {
             try
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                _wishlistService.RemoveFromWishlist(userId, productId);
+                await _wishlistService.RemoveFromWishlist(userId, productId);
                 return Json(new { success = true });
             }
             catch (Exception ex)

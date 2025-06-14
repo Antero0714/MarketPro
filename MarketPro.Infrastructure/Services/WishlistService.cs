@@ -5,35 +5,54 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MarketPro.Infrastructure.Services
 {
     public class WishlistService : IWishlistService
     {
         private readonly ApplicationDbContext _context;
+        private readonly RedisService _redisService;
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromHours(24);
 
-        public WishlistService(ApplicationDbContext context)
+        public WishlistService(ApplicationDbContext context, RedisService redisService)
         {
             _context = context;
+            _redisService = redisService;
         }
 
-        public IEnumerable<WishlistItem> GetWishlistItems(string userId)
+        public async Task<IEnumerable<WishlistItem>> GetWishlistItems(string userId)
         {
-            return _context.WishlistItems
+            // Try to get from cache first
+            var cacheKey = _redisService.GetWishlistKey(userId);
+            var cachedItems = await _redisService.GetAsync<List<WishlistItem>>(cacheKey);
+            
+            if (cachedItems != null)
+            {
+                return cachedItems;
+            }
+
+            // If not in cache, get from database
+            var items = await _context.WishlistItems
                 .Include(w => w.Product)
                     .ThenInclude(p => p.Images)
                 .Where(w => w.UserId == userId)
-                .ToList();
+                .ToListAsync();
+
+            // Cache the result
+            await _redisService.SetAsync(cacheKey, items, _cacheExpiration);
+
+            return items;
         }
 
-        public bool AddToWishlist(string userId, int productId)
+        public async Task<bool> AddToWishlist(string userId, int productId)
         {
-            var existingItem = _context.WishlistItems
-                .FirstOrDefault(w => w.UserId == userId && w.ProductId == productId);
+            var existingItem = await _context.WishlistItems
+                .FirstOrDefaultAsync(w => w.UserId == userId && w.ProductId == productId);
 
             if (existingItem != null)
             {
-                return false; // Item already exists in wishlist
+                return false;
             }
 
             var wishlistItem = new WishlistItem
@@ -44,19 +63,28 @@ namespace MarketPro.Infrastructure.Services
             };
 
             _context.WishlistItems.Add(wishlistItem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            // Invalidate cache
+            var cacheKey = _redisService.GetWishlistKey(userId);
+            await _redisService.RemoveAsync(cacheKey);
+
             return true;
         }
 
-        public void RemoveFromWishlist(string userId, int productId)
+        public async Task RemoveFromWishlist(string userId, int productId)
         {
-            var wishlistItem = _context.WishlistItems
-                .FirstOrDefault(w => w.UserId == userId && w.ProductId == productId);
+            var wishlistItem = await _context.WishlistItems
+                .FirstOrDefaultAsync(w => w.UserId == userId && w.ProductId == productId);
 
             if (wishlistItem != null)
             {
                 _context.WishlistItems.Remove(wishlistItem);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+
+                // Invalidate cache
+                var cacheKey = _redisService.GetWishlistKey(userId);
+                await _redisService.RemoveAsync(cacheKey);
             }
         }
     }
