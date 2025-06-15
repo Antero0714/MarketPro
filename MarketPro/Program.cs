@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http.Features;
 using MarketPro.Infrastructure.Services.Interfaces;
 using StackExchange.Redis;
 using System.Security.Authentication;
+using MarketPro.Infrastructure.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(7);
 });
 
+// Add SignalR
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+});
+
 var app = builder.Build();
 
 app.UseExceptionHandler("/Error"); // Обрабатывает исключения (например, 500)
@@ -94,6 +101,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Map SignalR hub
+app.MapHub<OrderHub>("/orderHub");
 
 app.MapControllerRoute(
     name: "areas",

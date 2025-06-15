@@ -1,4 +1,9 @@
 ﻿@model MarketPro.WebAPI.Areas.AdminPanel.Models.DashboardViewModel
+
+<!-- Добавляем контейнер для уведомлений -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 9999" id="notificationContainer">
+</div>
+
 @{
     ViewData["Title"] = "Admin Dashboard";
     Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
@@ -146,4 +151,85 @@
             vertical-align: middle;
         }
     </style>
+}
+
+@section Scripts {
+    <script>
+        // Функция для создания уведомления
+        function createNotification(customerName, orderId, status) {
+            const toastId = `toast-${Date.now()}`;
+            const html = `
+                <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header bg-primary text-white">
+                        <strong class="me-auto">Новый заказ</strong>
+                        <small>Только что</small>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p class="mb-0">Новый заказ #${orderId} от ${customerName}</p>
+                        <p class="mb-0">Статус: ${status}</p>
+                    </div>
+                </div>
+            `;
+
+            const container = document.getElementById('notificationContainer');
+            container.insertAdjacentHTML('beforeend', html);
+
+            const toastElement = document.getElementById(toastId);
+            const toast = new bootstrap.Toast(toastElement, {
+                autohide: true,
+                delay: 5000
+            });
+            toast.show();
+
+            // Обновляем страницу после того, как уведомление исчезнет
+            toastElement.addEventListener('hidden.bs.toast', function () {
+                location.reload();
+            });
+        }
+
+        // Дожидаемся полной загрузки страницы
+        document.addEventListener('DOMContentLoaded', function () {
+            // Инициализация SignalR
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/orderHub")
+                .withAutomaticReconnect()
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            // Обработчик получения уведомления
+            connection.on("ReceiveOrderNotification", (customerName, orderId, status) => {
+                console.log("Received notification:", { customerName, orderId, status });
+                createNotification(customerName, orderId, status);
+            });
+
+            // Обработчики состояния подключения
+            connection.onreconnecting(error => {
+                console.log("Reconnecting to SignalR hub...", error);
+            });
+
+            connection.onreconnected(connectionId => {
+                console.log("Reconnected to SignalR hub.", connectionId);
+            });
+
+            connection.onclose(error => {
+                console.log("Disconnected from SignalR hub.", error);
+            });
+
+            // Запуск подключения
+            async function startConnection() {
+                try {
+                    await connection.start();
+                    console.log("Connected to SignalR hub!");
+                } catch (err) {
+                    console.error("Error connecting to SignalR hub:", err);
+                    // Пробуем переподключиться через 5 секунд
+                    setTimeout(startConnection, 5000);
+                }
+            }
+
+            // Запускаем подключение
+            startConnection();
+        });
+    </script>
 }
