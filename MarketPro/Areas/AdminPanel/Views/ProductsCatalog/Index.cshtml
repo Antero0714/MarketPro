@@ -1,226 +1,189 @@
-﻿@{
-    ViewData["Title"] = "ProductCatalog";
+﻿@model MarketPro.Models.CatalogViewModel
+
+@{
+    ViewData["Title"] = "Product Catalog";
     Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
 }
+
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h4 class="pt-2 mb-4">Product Catalog</h4>
-            <div class="product-grid pt-2">
-                <div class="row">
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg1.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">3pc Outdoor Set - Grey/Grey</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg2.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Left Arm Patio Loveseat</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg3.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Felton Tufted Sofa - Gray</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg4.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Trellis Elevated Fretwork</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg5.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Valencia Area Rug</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg6.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Sullivan Swivel Glider Chair</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg7.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Tate Swivel Chair with Metal</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg8.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Ruben Balcony Bench And Table</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg9.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Carson Large Storage Credenza</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg10.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Tierman Swivel Chair with Metal</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg11.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Windham TV Stand</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg12.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Nespresso Vertuo Coffee</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg13.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Jewel Round Coffee & Side Table</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg14.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">SetLily Rattan Arm Chair</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg15.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">3pc Outdoor Set - Grey/Grey</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg16.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Left Arm Patio Loveseat</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg17.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Felton Tufted Sofa - Gray</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <div class="product-grid-item mb-30">
-                            <div class="product-img mb-3">
-                                <a href="product-details.html"><img src="/dashboard/assets/img/product/pg1.png" class="w-100" alt="" /></a>
-                            </div>
-                            <div class="product-content">
-                                <h6 class="mb-10">$24</h6>
-                                <a href="product-details.html"><p class="black">Trellis Elevated Fretwork</p></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12">
-                        <div class="pagination d-flex flex-column align-items-center mb-10">
-                            <ul class="list-inline d-inline-flex align-items-center mb-2">
-                                <li>
-                                    <a href="#"><img src="/dashboard/assets/img/svg/left-angle.svg" alt="" class="svg" /></a>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0">Product Catalog</h4>
+                <a href="@Url.Action("Create", "ProductsCatalog")" class="btn btn-primary">Add New Product</a>
+            </div>
+
+            <div class="row">
+                <!-- Sidebar Start -->
+                <div class="col-lg-3">
+                    <div class="border rounded p-3 mb-4">
+                        <h5 class="border-bottom pb-3 mb-3">Categories</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a href="@Url.Action("Index", "ProductsCatalog")" 
+                                   class="text-decoration-none @(Model.SelectedCategoryId == null ? "text-primary" : "text-dark")">
+                                    All Categories
+                                </a>
+                            </li>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <li class="mb-2">
+                                    <a href="@Url.Action("Index", "ProductsCatalog", new { categoryId = category.Id })" 
+                                       class="text-decoration-none @(Model.SelectedCategoryId == category.Id ? "text-primary" : "text-dark")">
+                                        @category.Name
+                                    </a>
                                 </li>
-                                <li class="current"><span class="current">2</span></li>
-                                <li>
-                                    <a href="#"><img src="/dashboard/assets/img/svg/right-angle.svg" alt="" class="svg" /></a>
-                                </li>
-                            </ul>
-                            <p class="font-12">Showing 20 items of 124</p>
-                        </div>
+                            }
+                        </ul>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="border rounded p-3">
+                        <h5 class="border-bottom pb-3 mb-3">Filters</h5>
+                        <form method="get" action="@Url.Action("Index", "ProductsCatalog")">
+                            @if (Model.SelectedCategoryId.HasValue)
+                            {
+                                <input type="hidden" name="categoryId" value="@Model.SelectedCategoryId" />
+                            }
+
+                            <div class="mb-3">
+                                <label class="form-label">Price Range</label>
+                                <div class="d-flex gap-2">
+                                    <input type="number" class="form-control" name="minPrice" value="@Model.MinPrice" placeholder="Min" />
+                                    <input type="number" class="form-control" name="maxPrice" value="@Model.MaxPrice" placeholder="Max" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Minimum Rating</label>
+                                <input type="number" class="form-control" name="rating" value="@Model.Rating" min="1" max="5" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Brand</label>
+                                <input type="text" class="form-control" name="brand" value="@Model.Brand" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                        </form>
                     </div>
                 </div>
+                <!-- Sidebar End -->
+
+                <!-- Products Grid Start -->
+                <div class="col-lg-9">
+                    <!-- Top Bar -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="text-muted">
+                            Showing @((Model.CurrentPage - 1) * 12 + 1)-@Math.Min(Model.CurrentPage * 12, Model.Products.Count) 
+                            of @Model.Products.Count results
+                        </span>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="row g-4">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="card h-100">
+                                    <div class="position-relative">
+                                        <img src="@(product.ImageUrls?.FirstOrDefault())" 
+                                             class="card-img-top"
+                                             alt="@product.Name"
+                                             style="height: 200px; object-fit: contain;">
+                                        @if (product.OrderCount > 50)
+                                        {
+                                            <span class="position-absolute top-0 start-0 badge bg-danger m-2">Hot</span>
+                                        }
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-2">
+                                            <a href="@Url.Action("Details", "ProductsCatalog", new { id = product.Id })" 
+                                               class="text-decoration-none text-dark">
+                                                @product.Name
+                                            </a>
+                                        </h6>
+                                        <div class="d-flex align-items-center gap-1 mb-2">
+                                            <span class="text-muted small">@product.Rating</span>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        </div>
+                                        <h5 class="card-text mb-3">$@product.Price.ToString("F2")</h5>
+                                        <div class="d-flex gap-2">
+                                            <a href="@Url.Action("Edit", "ProductsCatalog", new { id = product.Id })" 
+                                               class="btn btn-outline-primary btn-sm flex-grow-1">
+                                                Edit
+                                            </a>
+                                            <a href="@Url.Action("Delete", "ProductsCatalog", new { id = product.Id })" 
+                                               class="btn btn-outline-danger btn-sm flex-grow-1">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Pagination -->
+                    @if (Model.TotalPages > 1)
+                    {
+                        <nav class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                @if (Model.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="@Url.Action("Index", "ProductsCatalog", 
+                                            new { 
+                                                categoryId = Model.SelectedCategoryId, 
+                                                page = Model.CurrentPage - 1,
+                                                minPrice = Model.MinPrice,
+                                                maxPrice = Model.MaxPrice,
+                                                rating = Model.Rating,
+                                                brand = Model.Brand
+                                            })">
+                                            Previous
+                                        </a>
+                                    </li>
+                                }
+
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                                        <a class="page-link" href="@Url.Action("Index", "ProductsCatalog",
+                                            new { 
+                                                categoryId = Model.SelectedCategoryId, 
+                                                page = i,
+                                                minPrice = Model.MinPrice,
+                                                maxPrice = Model.MaxPrice,
+                                                rating = Model.Rating,
+                                                brand = Model.Brand
+                                            })">
+                                            @i
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (Model.CurrentPage < Model.TotalPages)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="@Url.Action("Index", "ProductsCatalog",
+                                            new { 
+                                                categoryId = Model.SelectedCategoryId, 
+                                                page = Model.CurrentPage + 1,
+                                                minPrice = Model.MinPrice,
+                                                maxPrice = Model.MaxPrice,
+                                                rating = Model.Rating,
+                                                brand = Model.Brand
+                                            })">
+                                            Next
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
+                </div>
+                <!-- Products Grid End -->
             </div>
         </div>
     </div>

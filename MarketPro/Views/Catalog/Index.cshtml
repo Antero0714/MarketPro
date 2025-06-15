@@ -25,6 +25,7 @@
     </div>
 </div>
 <!-- ========================= Breadcrumb End =============================== -->
+
 <!-- =============================== Shop Section Start ======================================== -->
 <section class="shop py-80">
     <div class="container container-lg">
@@ -35,11 +36,16 @@
                     <button type="button" class="shop-sidebar__close d-lg-none d-flex w-32 h-32 flex-center border border-gray-100 rounded-circle hover-bg-main-600 position-absolute inset-inline-end-0 me-10 mt-8 hover-text-white hover-border-main-600">
                         <i class="ph ph-x"></i>
                     </button>
+
+                    <!-- Categories -->
                     <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32 mb-32">
                         <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Categories</h6>
                         <ul class="max-h-540 overflow-y-auto scroll-sm">
                             <li class="mb-24">
-                                <a href="@Url.Action("Index", "Catalog")" class="text-gray-900 hover-text-main-600 @(Model.SelectedCategoryId == null ? "text-main-600" : "")">All Categories</a>
+                                <a href="@Url.Action("Index", "Catalog")" 
+                                   class="text-gray-900 hover-text-main-600 @(Model.SelectedCategoryId == null ? "text-main-600" : "")">
+                                    All Categories
+                                </a>
                             </li>
                             @foreach (var category in Model.Categories)
                             {
@@ -52,57 +58,78 @@
                             }
                         </ul>
                     </div>
-                    <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32 mb-32">
-                        <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Filter by Price</h6>
-                        <div class="price-filter">
-                            <div class="price-input flex-between gap-16 mb-24">
-                                <div class="field flex-1">
-                                    <span class="d-block mb-2">Min</span>
-                                    <input type="number" class="input-min form-control w-100" id="minPrice" value="@(Model.MinPrice ?? 0)">
-                                </div>
-                                <div class="field flex-1">
-                                    <span class="d-block mb-2">Max</span>
-                                    <input type="number" class="input-max form-control w-100" id="maxPrice" value="@(Model.MaxPrice ?? 10000)">
+
+                    <!-- Filters -->
+                    <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32">
+                        <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Filters</h6>
+                        <form method="get" action="@Url.Action("Index", "Catalog")" class="filter-form">
+                            @if (Model.SelectedCategoryId.HasValue)
+                            {
+                                <input type="hidden" name="categoryId" value="@Model.SelectedCategoryId" />
+                            }
+
+                            <!-- Price Range -->
+                            <div class="mb-32">
+                                <h6 class="text-md mb-16">Price Range</h6>
+                                <div class="d-flex gap-16">
+                                    <div class="flex-grow-1">
+                                        <input type="number" 
+                                               class="form-control py-12 px-16 rounded-8 border border-gray-100" 
+                                               name="minPrice" 
+                                               value="@Model.MinPrice" 
+                                               placeholder="Min" />
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <input type="number" 
+                                               class="form-control py-12 px-16 rounded-8 border border-gray-100" 
+                                               name="maxPrice" 
+                                               value="@Model.MaxPrice" 
+                                               placeholder="Max" />
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary w-100" id="applyPriceFilter">Apply Filter</button>
-                        </div>
-                    </div>
-                    <div class="shop-sidebar__box border border-gray-100 rounded-8 p-32 mb-32">
-                        <h6 class="text-xl border-bottom border-gray-100 pb-24 mb-24">Filter by Brand</h6>
-                        <ul class="max-h-540 overflow-y-auto scroll-sm">
-                            <li class="mb-24">
-                                <div class="form-check common-check common-radio">
-                                    <input class="form-check-input brand-filter" type="radio" name="brand" id="brand_all" value="" @(string.IsNullOrEmpty(Model.Brand) ? "checked" : "")>
-                                    <label class="form-check-label" for="brand_all">All Brands</label>
-                                </div>
-                            </li>
-                            @{
-                                var brands = Model.Products.Select(p => p.StoreName).Distinct().OrderBy(b => b).ToList();
-                            }
-                            @foreach (var brand in brands)
-                            {
-                                var brandId = brand.ToLower().Replace(" ", "_");
-                                <li class="mb-24">
-                                    <div class="form-check common-check common-radio">
-                                        <input class="form-check-input brand-filter" type="radio" name="brand" id="brand_@brandId" value="@brand" @(Model.Brand == brand ? "checked" : "")>
-                                        <label class="form-check-label" for="brand_@brandId">@brand</label>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
+
+                            <!-- Rating -->
+                            <div class="mb-32">
+                                <h6 class="text-md mb-16">Minimum Rating</h6>
+                                <input type="number" 
+                                       class="form-control py-12 px-16 rounded-8 border border-gray-100" 
+                                       name="rating" 
+                                       value="@Model.Rating" 
+                                       min="1" 
+                                       max="5" />
+                            </div>
+
+                            <!-- Brand -->
+                            <div class="mb-32">
+                                <h6 class="text-md mb-16">Brand</h6>
+                                <input type="text" 
+                                       class="form-control py-12 px-16 rounded-8 border border-gray-100" 
+                                       name="brand" 
+                                       value="@Model.Brand" />
+                            </div>
+
+                            <button type="submit" 
+                                    class="btn bg-main-600 text-white hover-bg-main-700 py-12 px-24 rounded-pill flex-center gap-8 fw-medium w-100">
+                                Apply Filters
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
             <!-- Sidebar End -->
-            <!-- Content Start -->
-            <div class="col-lg-9">
-                <!-- Top Start --> 
-                <div class="flex-between gap-16 flex-wrap mb-40">
-                    <span class="text-gray-900">Showing @((Model.CurrentPage - 1) * 4 + 1)-@Math.Min(Model.CurrentPage * 4, Model.Products.Count) of @Model.Products.Count results</span>
-                </div>
-                <!-- Top End -->
 
+            <!-- Products Grid Start -->
+            <div class="col-lg-9">
+                <!-- Top Bar -->
+                <div class="flex-between gap-16 flex-wrap mb-40">
+                    <span class="text-gray-900">
+                        Showing @((Model.CurrentPage - 1) * 4 + 1)-@Math.Min(Model.CurrentPage * 4, Model.Products.Count) 
+                        of @Model.Products.Count results
+                    </span>
+                </div>
+
+                <!-- Products Grid -->
                 <div class="row g-24">
                     @foreach (var product in Model.Products)
                     {
@@ -146,7 +173,7 @@
                     }
                 </div>
 
-                <!-- Pagination Start -->
+                <!-- Pagination -->
                 @if (Model.TotalPages > 1)
                 {
                     <ul class="pagination flex-center flex-wrap gap-16 mt-40">
@@ -154,7 +181,14 @@
                         {
                             <li class="page-item">
                                 <a class="page-link h-64 w-64 flex-center text-xxl rounded-8 fw-medium text-neutral-600 border border-gray-100" 
-                                   href="@Url.Action("Index", "Catalog", new { categoryId = Model.SelectedCategoryId, page = Model.CurrentPage - 1, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice, rating = Model.Rating, brand = Model.Brand })">
+                                   href="@Url.Action("Index", "Catalog", new { 
+                                       categoryId = Model.SelectedCategoryId, 
+                                       page = Model.CurrentPage - 1,
+                                       minPrice = Model.MinPrice,
+                                       maxPrice = Model.MaxPrice,
+                                       rating = Model.Rating,
+                                       brand = Model.Brand 
+                                   })">
                                     <i class="ph-bold ph-arrow-left"></i>
                                 </a>
                             </li>
@@ -164,7 +198,14 @@
                         {
                             <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
                                 <a class="page-link h-64 w-64 flex-center text-md rounded-8 fw-medium text-neutral-600 border border-gray-100" 
-                                   href="@Url.Action("Index", "Catalog", new { categoryId = Model.SelectedCategoryId, page = i, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice, rating = Model.Rating, brand = Model.Brand })">
+                                   href="@Url.Action("Index", "Catalog", new { 
+                                       categoryId = Model.SelectedCategoryId, 
+                                       page = i,
+                                       minPrice = Model.MinPrice,
+                                       maxPrice = Model.MaxPrice,
+                                       rating = Model.Rating,
+                                       brand = Model.Brand 
+                                   })">
                                     @i.ToString("D2")
                                 </a>
                             </li>
@@ -174,16 +215,22 @@
                         {
                             <li class="page-item">
                                 <a class="page-link h-64 w-64 flex-center text-xxl rounded-8 fw-medium text-neutral-600 border border-gray-100" 
-                                   href="@Url.Action("Index", "Catalog", new { categoryId = Model.SelectedCategoryId, page = Model.CurrentPage + 1, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice, rating = Model.Rating, brand = Model.Brand })">
+                                   href="@Url.Action("Index", "Catalog", new { 
+                                       categoryId = Model.SelectedCategoryId, 
+                                       page = Model.CurrentPage + 1,
+                                       minPrice = Model.MinPrice,
+                                       maxPrice = Model.MaxPrice,
+                                       rating = Model.Rating,
+                                       brand = Model.Brand 
+                                   })">
                                     <i class="ph-bold ph-arrow-right"></i>
                                 </a>
                             </li>
                         }
                     </ul>
                 }
-                <!-- Pagination End -->
             </div>
-            <!-- Content End -->
+            <!-- Products Grid End -->
         </div>
     </div>
 </section>
