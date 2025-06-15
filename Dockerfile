@@ -1,5 +1,5 @@
 # Use the official .NET SDK image to build the project
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS build
 WORKDIR /src
 
 # Copy csproj files and restore dependencies
@@ -23,7 +23,7 @@ FROM build AS publish
 RUN dotnet publish "MarketPro.WebAPI.csproj" -c Release -o /app/publish
 
 # Build the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:9.0-preview AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 EXPOSE 80
