@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/dashboard/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.css">
     <link rel="stylesheet" href="/dashboard/assets/plugins/apex/apexcharts.css">
     <link rel="stylesheet" href="/dashboard/assets/css/style.css">
+    @await RenderSectionAsync("Styles", required: false)
     
     <script src="/dashboard/assets/js/jquery.min.js"></script>
     <script src="/dashboard/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -48,7 +49,6 @@
                         <div class="col-9 col-lg-11 col-xl-8">
                             <div class="main-header-right d-flex justify-content-end">
                                 <ul class="nav">
-
                                     <li class="d-none d-lg-flex">
                                         <div class="main-header-date-time text-right">
                                             <h3 class="time"><span id="hours">21</span> <span id="point">:</span> <span id="min">06</span></h3><span class="date"><span id="date">Tue, 12 October 2019</span></span>

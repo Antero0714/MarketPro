@@ -1,19 +1,149 @@
-﻿@{
+﻿@model MarketPro.WebAPI.Areas.AdminPanel.Models.DashboardViewModel
+@{
     ViewData["Title"] = "Admin Dashboard";
-    Layout = "_AdminLayout";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 text-white">@Model.TotalUsers</h3>
+                            <div class="text-white-50">Total Users</div>
+                        </div>
+                        <div class="icon">
+                            <i class="icofont-users-alt-4 fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 text-white">@Model.TotalWishlistItems</h3>
+                            <div class="text-white-50">Wishlist Items</div>
+                        </div>
+                        <div class="icon">
+                            <i class="icofont-heart-alt fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-info text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 text-white">@Model.TotalOrders</h3>
+                            <div class="text-white-50">Total Orders</div>
+                        </div>
+                        <div class="icon">
+                            <i class="icofont-shopping-cart fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 text-white">@Model.TotalCartItems</h3>
+                            <div class="text-white-50">Cart Items</div>
+                        </div>
+                        <div class="icon">
+                            <i class="icofont-cart fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Welcome to Admin Dashboard</h3>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Recent Orders</h5>
                 </div>
                 <div class="card-body">
-                    <p>This is the admin dashboard. You can manage your application from here.</p>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Status</th>
+                                    <th>Products</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.RecentOrders)
+                                {
+                                    <tr>
+                                        <td>@order.OrderId</td>
+                                        <td>@order.OrderDate.ToString("dd MMM yyyy HH:mm")</td>
+                                        <td>@order.CustomerName</td>
+                                        <td>
+                                            <span class="badge @(order.Status == "Completed" ? "badge-success" : 
+                                                               order.Status == "Pending" ? "badge-warning" : 
+                                                               "badge-info")">
+                                                @order.Status
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0">
+                                                @foreach (var item in order.Items)
+                                                {
+                                                    <li>@item.ProductName (@item.Quantity шт.)</li>
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Styles {
+    <style>
+        .card .icon {
+            font-size: 30px;
+            line-height: 1;
+        }
+        .badge {
+            padding: 0.4em 0.8em;
+            font-size: 85%;
+        }
+        .badge-success {
+            background-color: #1cc88a;
+        }
+        .badge-warning {
+            background-color: #f6c23e;
+            color: #fff;
+        }
+        .badge-info {
+            background-color: #36b9cc;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
+}
