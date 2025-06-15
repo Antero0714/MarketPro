@@ -14,15 +14,6 @@ using MarketPro.Infrastructure.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Kestrel
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ListenLocalhost(7213, listenOptions =>
-    {
-        listenOptions.UseHttps();
-    });
-});
-
 // Configure form options for file uploads
 builder.Services.Configure<FormOptions>(options =>
 {
@@ -89,12 +80,6 @@ var app = builder.Build();
 app.UseExceptionHandler("/Error"); // Обрабатывает исключения (например, 500)
 app.UseStatusCodePagesWithReExecute("/Error/{0}"); // Обрабатывает статус-коды (например, 404)
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
